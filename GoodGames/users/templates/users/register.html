@@ -1,8 +1,5 @@
-<html>
-    <head>
-
-    </head>
-    <body>
+{% extends 'game/base.html' %}
+{% block content %}
         <h3>
             Register
         </h3>
@@ -14,7 +11,7 @@
                     {{ form.as_p }}
                 </fieldset>
                 
-                <button type="submit">Sign Up</button>
+                <button type="submit" class="btn btn-primary">Sign Up</button>
             </form>
 
             <div>
@@ -23,5 +20,6 @@
                 </small>
             </div>
         </div>
-    </body>
-</html>
+
+        
+{% endblock content %}
