@@ -1,25 +1,37 @@
 {% extends 'game/base.html' %}
 {% block content %}
-        <h3>
-            Register
-        </h3>
-        <div>
-            <form method="POST">
-                {% csrf_token %}
+<div class="card">
+    <div class="card-body">
+        <h1 class="card-title">Register</h3>
+        <form method="POST">
+            {% csrf_token %}
 
-                <fieldset>
-                    {{ form.as_p }}
-                </fieldset>
-                
-                <button type="submit" class="btn btn-primary">Sign Up</button>
-            </form>
+            {{ form.errors }}
+            {% for field in form %}
+            <div class="form-group">
 
-            <div>
-                <small>
-                    Do you already have an account? <a href="{% url 'login' %}">Login</a>
-                </small>
+                {{ field.label_tag }}
+                {% for error in field.errors %}
+                    <p class="text-warning">{{ error }}</p>
+                {% endfor %}
+                {{ field }}
+                {% if field.help_text %}
+                    <p class="form-text text-muted">{{ field.help_text|safe }}</p>
+                {% endif %}
             </div>
+            {% endfor %}
+
+            <button type="submit" class="btn btn-primary">Sign Up</button>
+        </form>
+
+        <div>
+            <small>
+                Do you already have an account? <a href="{% url 'login' %}">Login</a>
+            </small>
         </div>
 
-        
+    </div>
+</div>
+
+
 {% endblock content %}
