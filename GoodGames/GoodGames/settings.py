@@ -77,8 +77,12 @@ WSGI_APPLICATION = 'GoodGames.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'd8kru2663v35vs',
+        'USER': 'rlwswuadilsvgf',
+        'PASSWORD': '5edd6c090f3212c254ac236b624e59bb96bd84c52997d1459115e004728fb7a9',
+        'HOST': 'ec2-3-226-231-4.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
