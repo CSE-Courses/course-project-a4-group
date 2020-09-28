@@ -1,0 +1,78 @@
+.search-result-card > .body > .actions > .btn {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.btn-default {
+    color: rgb(232, 230, 227);
+    background-color: rgb(55, 62, 77);
+    border-color: rgb(113, 105, 93);
+}
+.btn {
+    background-image: none;
+    border-color: transparent;
+}
+.btn {
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+}
+.btn-block {
+    display: block;
+    width: 276px;
+}
+
+.btn-default {
+    color: #fff;
+    background-color: #454d60;
+    border-color: #454d60;
+}
+
+.btn {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+        border-top-color: transparent;
+        border-right-color: transparent;
+        border-bottom-color: transparent;
+        border-left-color: transparent;
+    white-space: nowrap;
+    padding: 6px 12px;
+        padding-top: 6px;
+        padding-bottom: 6px;
+    font-size: 14px;
+    line-height: 1.428571429;
+    border-radius: 2px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.btn-lg, .btn-group-lg > .btn {
+    padding: 10px 16px;
+    font-size: 18px;
+    line-height: 1.3333333;
+    border-radius: 2px;
+}
+
+.list-details {
+    list-style-type: square;
+}
+
+body {
+    color: rgb(207, 203, 197);
+}
+
+body {
+    font-family: "Source Sans Pro", Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    line-height: 1.428571429;
+    color: #D8D8D8;
+}
