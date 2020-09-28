@@ -1,0 +1,97 @@
+{% extends './base.html' %}
+{%load static %}
+
+{% block content %}
+ <!-- Shop Css -->
+  <link rel="stylesheet" href="{% static 'shop/css/bootstrap.min.css' %}">
+  <!-- style css -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <!-- Responsive-->
+  <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+
+    <div class="main-layout position_head">
+    
+    <div class="glasses">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 offset-md-1 text-center pb-3">
+                    <div class="titlepage">
+                        <h2 class="title-color" style="color:#e14eca;"> <strong>Gaming Shop</strong></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                    <div class="glasses_box">
+                        <figure><img src="{% static 'shop/images/ps4.png'%}" alt="#" /></figure>
+                        <h3 class = "text-white"><span class="blu">$</span>99,000 GG points</h3>
+                        <p class = "text-center" >Ps4</p>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                    <div class="glasses_box">
+                        <figure><img src="{% static 'shop/images/ps4-controller.jpg' %}" alt="#" /></figure>
+                        <h3 class = "text-white"><span class="blu">$</span>10,000 GG points</h3>
+                        <p class = "text-center">Ps4 Controller</p>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                    <div class="glasses_box">
+                        <figure><img src="{% static 'shop/images/xbox.jpg'%}" alt="#" /></figure>
+                        <h3 class = "text-white"><span class="blu">$</span>99,000 GG points</h3>
+                        <p class = "text-center">Xbox</p>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                    <div class="glasses_box">
+                        <figure><img src="{% static 'shop/images/xbox-controller.jpg' %}" alt="#" /></figure>
+                        <h3 class = "text-white"><span class="blu">$</span>18,000 GG points</h3>
+                        <p class = "text-center">Xbox Controller</p>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                    <div class="glasses_box">
+                        <figure><img src="{% static 'shop/images/madden.jpg' %}" alt="#" /></figure>
+                        <h3 class = "text-white"><span class="blu">$</span>25,000 GG points</h3>
+                        <p class = "text-center">Madden</p>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                    <div class="glasses_box">
+                        <figure><img src="{% static 'shop/images/nba2k21.jpg' %}" alt="#" /></figure>
+                        <h3 class = "text-white"><span class="blu">$</span>25,000 GG points</h3>
+                        <p class = "text-center">Nba 2k21</p>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                    <div class="glasses_box">
+                        <figure><img src="{% static 'shop/images/gamingMonitor.jpg' %}" alt="#" /></figure>
+                        <h3 class = "text-white"><span class="blu">$</span>60,000 GG points</h3>
+                        <p class = "text-center">Gaming Monitor</p>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                    <div class="glasses_box">
+                        <figure><img src="{% static 'shop/images/gamingHeadset.jpg' %}" alt="#" /></figure>
+                        <h3 class = "text-white"><span class="blu">$</span>15,000 GG points</h3>
+                        <p class = "text-center">Gaming Headset</p>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <!-- <a class="read_more" href="#">Read More</a> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+  <script src="{% static 'shop/js/jquery.min.js' %}"></script>
+  <script src="{% static 'shop/js/popper.min.js' %}"></script>
+  <script src="{% static 'shop/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'shop/js/jquery-3.0.0.min.js' %}"></script>
+  <!-- sidebar -->
+  <!-- <script src=" {% static 'shop/js/jquery.mCustomScrollbar.concat.min.js' %}"></script> -->
+  <!-- <script src=" {% static 'shop/js/custom.js' %}"></script> -->
+{% endblock content %}

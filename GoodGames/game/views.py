@@ -4,3 +4,5 @@ from django.shortcuts import render
 
 def home(request):
     return render(request, 'game/home.html')
+def shop(request):
+    return render(request, 'game/shop.html')
