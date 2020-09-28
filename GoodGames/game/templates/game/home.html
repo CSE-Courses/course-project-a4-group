@@ -1,6 +1,92 @@
 {% extends './base.html' %}
+{% load static  %}
 {% block content %}
-<h1>this is the home page</h1>
-
-<p> some more content</p>
+<link rel="stylesheet" href="{% static 'game/assets/css/dashboard.css' %}">
+<p>
+  Howdy there {{user.get_username}}! Looking to join a tournament or an event? You can find a list of active tournaments and events down below.
+</p>
+  <h1>Tournaments</h1>
+  <div class="list -four">
+      <div class="search-result-card">
+          <div class="header">
+              <img src="https://image.cnbcfm.com/api/v1/image/106560246-1591029813185copy-of-v_brand_promo_horizontal_offwhite.jpg" style="width:275px;height:100px;">
+          </div>
+          <div class="body">
+              <div class="user-details">
+                  <div class="img">
+                      <!-- Add created user's profile avatar here <img src="" style="width:40px;height:40px;"> -->
+                  </div>
+                  <div class="name -break">
+                      <strong>Valorant Offical Ranking Tournament</strong>
+                  </div>
+              </div>
+              <ul class="list-details">
+                  <li>
+                      <!-- Add a small icon image for valorant game here -->
+                      <span class="text">Valorant</span>
+                  </li>
+                  <li>
+                      <!-- Add an icon image for particant png here -->
+                      <span class="text">0 participants</span>
+                  </li>
+                  <li>
+                      <!-- Add a calendar icon image here -->
+                      <span class="text">September 27, 2020</span>
+                  </li>
+                  <li>
+                      <span class="text">Created on September 25, 2020</span>
+                  </li>
+              </ul>
+              <div class="actions">
+                  <a class="btn btn-block btn-default" href="#">View</a>
+              </div>
+          </div>
+      </div>
+      <!-- Load 7 more public tournaments here -->
+      <div class="actions">
+          <br>
+          <a class="btn btn-lg btn-default btn-block" hrf="#">View More Tournaments</a>
+      </div>
+  </div>
+  <br>
+  <h1>Events</h1>
+  <div class="list -four">
+      <div class="search-result-card">
+          <div class="header">
+              <img src="https://ak.picdn.net/shutterstock/videos/33322030/thumb/1.jpg" style="width:275px;height:100px;">
+          </div>
+          <div class="body">
+              <div class="user-details">
+                  <div class="img">
+                      <!-- Add created user's profile avatar here <img src="" style="width:40px;height:40px;"> -->
+                  </div>
+                  <div class="name -break">
+                      <strong>Valorant Halloween Madness</strong>
+                  </div>
+              </div>
+              <ul class="list-details">
+                  <li>
+                      <!-- Add a calendar image here -->
+                      <span class="text">October 31, 2020 - November 1, 2020</span>
+                  </li>
+                  <li>
+                      <!-- Add a pinpoint gps image here -->
+                      <span class="text">This event is held online</span>
+                  </li>
+                  <li>
+                      <!-- Add a participants image here -->
+                      <span class="text">0 attendees</span>
+                  </li>
+              </ul>
+              <div class="actions">
+                  <a class="btn btn-block btn-default" href="#">View</a>
+              </div>
+          </div>
+      </div>
+      <!-- Load 7 more public events here -->
+      <div class="actions">
+          <br>
+          <a class="btn btn-lg btn-default btn-block" hrf="#">View More Events</a>
+      </div>
+  </div>
 {% endblock content %}
