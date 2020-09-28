@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Submit Game Match Result</title>
-</head>
-<body>
+{% extends 'game/base.html' %}
+{% block content %}
+
 	<h1>Game Match Result</h1>
 	<form action="/action_page.php">
 	  <label for="gameTitle">Game Title:</label><br>
@@ -17,5 +14,5 @@
 	  <label for="opponent">Opponent</label><br><br>
 	  <input type="submit" value="Submit">
 	</form> 
-</body>
-</html>
+	
+{% endblock content %}
