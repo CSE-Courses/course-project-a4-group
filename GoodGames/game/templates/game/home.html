@@ -4,12 +4,15 @@
 <link rel="stylesheet" href="{% static 'game/assets/css/dashboard.css' %}">
 <h1 style="text-align: center;">Welcome to GoodGames!</h1>
 <div class="body">
-    <h2>What is GoodGames?</h2>
+    <div class="actions" style="text-align: center;">
+        <a class="btn btn-block btn-default" style="background-color: rgb(216, 54, 175);" href="{% url 'register' %}">Start Gaming Today</a>
+    </div>    
+    <h2 style="color: rgb(216, 54, 175);">What is GoodGames?</h2>
     <h4>GoodGames is a platform for gamers and friends to come together to play in tournaments and game matches. 
         You can join tournaments or you can create your own or you can play against another gamer. 
         After you create an account, you can begin earning different kinds of currency depending on what you are participating in.        
     </h4>
-    <h2>About Currency</h2>
+    <h2 style="color: rgb(216, 54, 175);">About Currency</h2>
     <ul class="list-details">
         <li>
             <h3 class="text">Public Tournaments</h3>
@@ -27,8 +30,8 @@
             <h4 class="text">When you play private matches against another gamer or friend, you can choose to wager custom currency and decide what the real world value is. </h4>
         </li>
     </ul>
-    <div class="actions" style="text-align: center;">
-        <a class="btn btn-block btn-default" style="background-color: rgb(216, 54, 175);" href="{% url 'register' %}">Start Gaming Today</a>
-    </div>
+    <h2 style="color: rgb(216, 54, 175);">Navigation</h2>
+    <h4>Once you login, on the left sidebar you will be able to view your dashboard, your private tournaments, your profile, your detailed game statistics, and the GG shop.
+        You will also be able to submit private game match results against another person and have it recorded to your account. </h4>
 </div>
 {% endblock content %}
