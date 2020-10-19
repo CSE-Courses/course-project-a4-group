@@ -67,5 +67,23 @@ def dashboard(request):
     return render(request, 'game/dashboard.html')
   
 def profile(request):
+    if request.method == "POST":
+        firstname = request.POST.get("firstname")
+        lastname = request.POST.get("lastname")
+        address = request.POST.get("address")
+        city = request.POST.get("city")
+        state = request.POST.get("state")
+        zip_code = request.POST.get("zip_code")
+        bio = request.POST.get("bio")
+        request.user.first_name = firstname
+        request.user.last_name = lastname
+        request.user.profile.address = address
+        request.user.profile.city = city
+        request.user.profile.state = state
+        request.user.profile.zip_code = zip_code
+        request.user.profile.bio = bio
+        request.user.save()
+        request.user.profile.save()
+
     return render(request, 'game/profile.html')
 
