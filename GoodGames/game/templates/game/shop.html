@@ -5,10 +5,12 @@
  <!-- Shop Css -->
   <link rel="stylesheet" href="{% static 'shop/css/bootstrap.min.css' %}">
   <!-- style css -->
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <!--<link rel="stylesheet" href="{% static 'shop/css/style.css' %}"> -->
   <!-- Responsive-->
-  <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
-
+  <!-- <link rel="stylesheet" href="{% static 'shop/css/responsive.css' %}"> -->
+    <link rel="stylesheet" href="{% static 'shop/css/buttons.css' %}">
+    <div class="card">
+        <div class="card-body">
     <div class="main-layout position_head">
     
     <div class="glasses">
@@ -28,6 +30,8 @@
                         <figure><img src="{% static 'shop/images/ps4.png'%}" alt="#" /></figure>
                         <h3 class = "text-white"><span class="blu">$</span>99,000 GG points</h3>
                         <p class = "text-center" >Ps4</p>
+                        <a href="{% url 'buy' %}" class="text-center button4 " style="background-color:#f14ebd">Buy Now</a>
+                        
                     </div>
                 </div>
                 <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
@@ -35,6 +39,7 @@
                         <figure><img src="{% static 'shop/images/ps4-controller.jpg' %}" alt="#" /></figure>
                         <h3 class = "text-white"><span class="blu">$</span>10,000 GG points</h3>
                         <p class = "text-center">Ps4 Controller</p>
+                        <a href="{% url 'buy' %}" class="text-center button4 " style="background-color:#f14ebd">Buy Now</a>
                     </div>
                 </div>
                 <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
@@ -42,6 +47,7 @@
                         <figure><img src="{% static 'shop/images/xbox.jpg'%}" alt="#" /></figure>
                         <h3 class = "text-white"><span class="blu">$</span>99,000 GG points</h3>
                         <p class = "text-center">Xbox</p>
+                        <a href="{% url 'buy' %}" class="text-center button4 " style="background-color:#f14ebd">Buy Now</a>
                     </div>
                 </div>
                 <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
@@ -49,6 +55,7 @@
                         <figure><img src="{% static 'shop/images/xbox-controller.jpg' %}" alt="#" /></figure>
                         <h3 class = "text-white"><span class="blu">$</span>18,000 GG points</h3>
                         <p class = "text-center">Xbox Controller</p>
+                        <a href="{% url 'buy' %}" class="text-center button4 " style="background-color:#f14ebd">Buy Now</a>
                     </div>
                 </div>
                 <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
@@ -56,6 +63,7 @@
                         <figure><img src="{% static 'shop/images/madden.jpg' %}" alt="#" /></figure>
                         <h3 class = "text-white"><span class="blu">$</span>25,000 GG points</h3>
                         <p class = "text-center">Madden</p>
+                        <a href="{% url 'buy' %}" class="text-center button4 " style="background-color:#f14ebd">Buy Now</a>
                     </div>
                 </div>
                 <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
@@ -63,6 +71,7 @@
                         <figure><img src="{% static 'shop/images/nba2k21.jpg' %}" alt="#" /></figure>
                         <h3 class = "text-white"><span class="blu">$</span>25,000 GG points</h3>
                         <p class = "text-center">Nba 2k21</p>
+                        <a href="{% url 'buy' %}" class="text-center button4 " style="background-color:#f14ebd">Buy Now</a>
                     </div>
                 </div>
                 <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
@@ -70,6 +79,7 @@
                         <figure><img src="{% static 'shop/images/gamingMonitor.jpg' %}" alt="#" /></figure>
                         <h3 class = "text-white"><span class="blu">$</span>60,000 GG points</h3>
                         <p class = "text-center">Gaming Monitor</p>
+                        <a href="{% url 'buy' %}" class="text-center button4 " style="background-color:#f14ebd">Buy Now</a>
                     </div>
                 </div>
                 <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
@@ -77,6 +87,7 @@
                         <figure><img src="{% static 'shop/images/gamingHeadset.jpg' %}" alt="#" /></figure>
                         <h3 class = "text-white"><span class="blu">$</span>15,000 GG points</h3>
                         <p class = "text-center">Gaming Headset</p>
+                        <a href="{% url 'buy' %}" class="text-center button4 " style="background-color:#f14ebd">Buy Now</a>
                     </div>
                 </div>
                 <div class="col-md-12">
@@ -86,7 +97,8 @@
         </div>
     </div>
 </div>
-    
+</div> 
+</div>     
   <script src="{% static 'shop/js/jquery.min.js' %}"></script>
   <script src="{% static 'shop/js/popper.min.js' %}"></script>
   <script src="{% static 'shop/js/bootstrap.bundle.min.js' %}"></script>
