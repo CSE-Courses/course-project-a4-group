@@ -18,4 +18,10 @@ def buy_view(request):
         'form': form
     }
     return render(request, 'users/buy.html', context)
-    
+  
+def dashboard(request):
+    return render(request, 'game/dashboard.html')
+  
+def profile(request):
+    return render(request, 'game/profile.html')
+
