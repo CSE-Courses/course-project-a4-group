@@ -8,3 +8,5 @@ def shop(request):
     return render(request, 'game/shop.html')
 def dashboard(request):
     return render(request, 'game/dashboard.html')
+def profile(request):
+    return render(request, 'game/profile.html')
