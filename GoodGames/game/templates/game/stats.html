@@ -1,0 +1,28 @@
+{% extends './base.html' %}
+{%load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'stats/css/stats.css' %}">
+<div class="stats-section">
+        <div class="first-fifth" id="username">UserName: </div>
+        <div class="second-fifth" id="wins">Wins: </div>
+        <div class="third-fifth" id="losses">Losses: </div>
+        <div class="fourth-fifth" id="gamesPlayed">Games Played: </div>
+        <div class="fifth-fifth" id="ggPoints">GG Points: </div>
+     
+        <div class="first-column" id="match-history-section">
+                <div class="match-history-header">Recent Match History</div>
+        </div>
+        <div class="second-column">
+                <canvas id="myChart" width="400" height="310"></canvas>
+                <canvas id="lineChart" width="400" height="310"></canvas>
+        </div>
+ </div> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+<script src="{% static 'stats/js/stats-index.js' %}"></script>
+
+
+
+
+
+{% endblock content %}

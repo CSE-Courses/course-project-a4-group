@@ -1,0 +1,169 @@
+
+
+.first-column {
+    width: 66%;
+    padding: 0 10px 0 0;
+    float: left;
+    background-color: #525f7f;
+    color: rgba(34, 42, 66, 0);
+}
+.match-history-header{
+    color: black;
+    padding-bottom: 10px;
+    font-size: 30px;
+    text-align: center;
+}
+.match-element{
+    color: black;
+    padding-bottom: 7.5px;
+    font-size: 30px;
+    text-align: center;
+}
+.match-element::after{
+    content: "";
+    display: table;
+    clear: both;
+}
+.second-column {
+    width: 33%;
+    padding: 0 10px 0 0;
+    float: right;
+}
+
+@media only screen and (max-width: 800px) {
+
+   .first-column {
+        width: 100%;
+        padding-bottom: 10px;
+        float: none;
+    }
+
+    .second-column {
+        width: 100%;
+        padding-bottom: 10px;
+        float: none;
+    }
+}
+
+
+
+.first-fifth {
+    width: 20%;
+    padding: 0 10px 0 0;
+    float: left;
+    margin-bottom: 25px;
+    font-size: 19px;
+    text-align: center;
+}
+
+.second-fifth {
+    width: 20%;
+    padding: 0 10px 0 0;
+    float: left;
+    margin-bottom: 25px;
+    font-size: 19px;
+    text-align: center;
+}
+.third-fifth {
+    width: 20%;
+    padding: 0 10px 0 0;
+    float: left;
+    margin-bottom: 25px;
+    font-size: 19px;
+    text-align: center;
+}
+
+.fourth-fifth {
+    width: 20%;
+    padding: 0 10px 0 0;
+    float: left;
+    margin-bottom: 25px;
+    font-size: 19px;
+    text-align: center;
+}
+.fifth-fifth {
+    width: 20%;
+    padding: 0 10px 0 0;
+    float: right;
+    margin-bottom: 25px;
+    font-size: 19px;
+    text-align: center;
+}
+
+
+.match-first-fourth {
+    color: black;
+    width: 25%;
+    padding: 0 10px 10px 0;
+    float: left;
+    margin-bottom: 25px;
+    font-size: 19px;
+    text-align: center;
+    white-space: pre-line;
+}
+
+.match-second-fourth {
+    color: black;
+    width: 25%;
+    padding: 0 10px 10px 0;
+    float: left;
+    margin-bottom: 25px;
+    font-size: 19px;
+    text-align: center;
+    white-space: pre-line;
+}
+.match-third-fourth {
+    color: black;
+    width: 25%;
+    padding: 0 10px 10px 0;
+    float: left;
+    margin-bottom: 25px;
+    font-size: 19px;
+    text-align: center;
+    white-space: pre-line;
+}
+
+.match-fourth-fourth {
+    color: black;
+    width: 25%;
+    padding: 0 10px 10px 0;
+    float: right;
+    font-size: 19px;
+    text-align: center;
+    white-space: pre-line;
+}
+
+
+
+@media only screen and (max-width: 960px) {
+
+    .first-fifth {
+        width: 100%;
+        padding-bottom: 10px;
+        float: none;
+    }
+
+    .second-fifth {
+        width: 100%;
+        padding-bottom: 10px;
+        float: none;
+    }
+
+    .third-fifth {
+        width: 100%;
+        padding-bottom: 10px;
+        float: none;
+    }
+    .fourth-fifth {
+        width: 100%;
+        padding-bottom: 10px;
+        float: none;
+    }
+
+    .fifth-fifth {
+        width: 100%;
+        padding-bottom: 10px;
+        float: none;
+    }
+
+}
