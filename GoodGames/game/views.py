@@ -9,4 +9,5 @@ def shop(request):
 def dashboard(request):
     return render(request, 'game/dashboard.html')
 def profile(request):
+    first_name = request.POST.get("firstname")
     return render(request, 'game/profile.html')
