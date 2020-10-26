@@ -87,3 +87,6 @@ def profile(request):
 
     return render(request, 'game/profile.html')
 
+def bracket(request):
+    return render(request, 'game/bracket.html')
+
