@@ -9,3 +9,9 @@ class buyNow(models.Model):
     address2 = models.CharField("Address line 2", max_length=1024, blank=True, null=True)
     zip_code = models.CharField("ZIP", max_length=12)
     city = models.CharField("City", max_length=1024)
+class matchData(models.Model):
+   ggPoints = models.DecimalField(max_digits = 15, decimal_places = 2)
+   
+
+
+   

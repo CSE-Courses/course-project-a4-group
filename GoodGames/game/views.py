@@ -12,6 +12,8 @@ def shop(request):
 
 def stats(request):
     return render(request, 'game/stats.html')
+def ads(request):
+    return render(request, 'game/ads.html')
   
 def getData(request):
     data = {
