@@ -1,8 +1,9 @@
 {% extends 'game/base.html' %}
 {% block content %}
-
+<div class = "card">
+	<div class = "card-body">
 	<h1>Game Match Result</h1>
-	<form action="/action_page.php">
+	<form>
 	  <label for="gameTitle">Game Title:</label><br>
 	  <input type="text" id="gameTitle" name="gameTitle" value="RPS"><br><br>
 	  <label for="opponentName">Opponent Name:</label><br>
@@ -12,7 +13,19 @@
 	  <label for="you">You</label>
 	  <input type="radio" id="opponent" name="opponent" value="opponent">
 	  <label for="opponent">Opponent</label><br><br>
-	  <input type="submit" value="Submit">
+	  <div>
+          <button type="submit" class="btn btn-fill btn-primary" onclick="saveSetting()">Submit</button>
+      </div>
 	</form> 
+	</div>
+</div>
+<script type="text/javascript">
+
+function saveSetting() {
+  functions.showNotification('top','right', 'You have successfully submitted your game match result!')
+}
+
+</script>
+
 	
 {% endblock content %}
