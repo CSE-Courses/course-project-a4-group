@@ -1,6 +1,54 @@
 {% extends './base.html' %}
+{% load static  %}
 {% block content %}
-<h1>this is the home page</h1>
-
-<p> some more content</p>
+<link rel="stylesheet" href="{% static 'game/assets/css/dashboard.css' %}">
+<div class="card">
+    <div class="card-body">
+        <h1 style="text-align: center;">Welcome to GoodGames!</h1>
+        <div class="body">
+            {% if user.is_authenticated == False %}
+            <div class="actions" style="text-align: center;">
+                <a class="btn btn-block btn-default" style="background-color: rgb(216, 54, 175);"
+                    href="{% url 'register' %}">Start Gaming Today</a>
+            </div>
+            {% endif %}
+            <h2 style="color: rgb(216, 54, 175);">What is GoodGames?</h2>
+            <h4>GoodGames is a platform for gamers and friends to come together to play in tournaments and game matches.
+                You can join tournaments or you can create your own or you can play against another gamer.
+                After you create an account, you can begin earning different kinds of currency depending on what you are
+                participating in.
+            </h4>
+            <h2 style="color: rgb(216, 54, 175);">About Currency</h2>
+            <ul class="list-details">
+                <li>
+                    <h3 class="text">Public Tournaments</h3>
+                    <h4 class="text">When you participate in GoodGames sponsored public tournaments, which are open to
+                        all registered users of GoodGames, you can earn GG currency
+                        which can be redeemed at the <a
+                            href="{% if user.is_authenticated %}{% url 'shop' %}{% else %}{% url 'login' %}{% endif %}">GG
+                            Shop</a>.
+                    </h4>
+                </li>
+                <li>
+                    <h3 class="text">Private Tournaments</h3>
+                    <h4 class="text">When you participate private tournaments with friends on GoodGames, you can earn
+                        custom currency which you and your friends
+                        can decide what the real world value is.</h4>
+                </li>
+                <li>
+                    <h3 class="text">Private Game Matches</h3>
+                    <h4 class="text">When you play private matches against another gamer or friend, you can choose to
+                        wager custom currency and decide what the real world value is. </h4>
+                </li>
+            </ul>
+            <h2 style="color: rgb(216, 54, 175);">Navigation</h2>
+            <h4>
+                Once you login, on the left sidebar you will be able to view your dashboard, your private tournaments,
+                your profile, your detailed game statistics, and the GG shop.
+                You will also be able to submit private game match results against another person and have it recorded
+                to your account. 
+            </h4>
+        </div>
+    </div>
+</div>
 {% endblock content %}

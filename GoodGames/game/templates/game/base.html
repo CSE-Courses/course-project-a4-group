@@ -16,6 +16,7 @@
 
   <!-- Black Dashboard CSS -->
   <link href="{% static 'game/assets/css/black-dashboard.css' %}" rel="stylesheet" />
+  <link href="{% static 'game/assets/css/nucleo-icons.css' %}" rel="stylesheet" />
 </head>
 
 <body>
@@ -39,36 +40,47 @@
       <div class="sidebar-wrapper">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="#0">
+            <a class="nav-link" href="{% if user.is_authenticated %}{% url 'dashboard' %}{% else %}{% url 'login' %}{% endif %}">
               <i class="tim-icons icon-chart-pie-36"></i>
               <p>Dashboard</p>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#0">
+            <a class="nav-link" href="{% if user.is_authenticated %}{% url 'home' %}{% else %}{% url 'login' %}{% endif %}">
               <i class="tim-icons icon-chart-pie-36"></i>
               <p>My Tournaments</p>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#0">
+            <a class="nav-link" href="{% if user.is_authenticated %}{% url 'profile' %}{% else %}{% url 'login' %}{% endif %}">
               <i class="tim-icons icon-chart-pie-36"></i>
               <p>Profile</p>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#0">
+            <a class="nav-link" href="{% if user.is_authenticated %}{% url 'stats' %}{% else %}{% url 'login' %}{% endif %}">
               <i class="tim-icons icon-chart-pie-36"></i>
               <p>Game Stats</p>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'gameMatchResult-form' %}">
+            <a class="nav-link" href="{% if user.is_authenticated %}{% url 'gameMatchResult-form' %}{% else %}{% url 'login' %}{% endif %}">
               <i class="tim-icons icon-chart-pie-36"></i>
               <p>New Game Match Result</p>
             </a>
           </li>
-		  
+          <li class="nav-item">
+            <a class="nav-link" href="{% if user.is_authenticated %}{% url 'shop' %}{% else %}{% url 'login' %}{% endif %}">
+              <i class="tim-icons icon-chart-pie-36"></i>
+              <p>GG Shop</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% if user.is_authenticated %}{% url 'ads' %}{% else %}{% url 'login' %}{% endif %}">
+              <i class="tim-icons icon-chart-pie-36"></i>
+              <p>Get back in the game</p>
+            </a>
+          </li>
           <!-- your sidebar here -->
         </ul>
       </div>
@@ -150,6 +162,30 @@
   <script src="{% static 'game/assets/js/plugins/bootstrap-notify.js' %}"></script>
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="{% static 'game/assets/js/black-dashboard.js' %}" type="text/javascript"></script>
+<!--  Website Functions  --> 
+<script type="text/javascript">
+    type = ['primary','info','success','warning','danger'];
+    functions = {
+        showNotification: function(from, align, message){
+          color = Math.floor((Math.random() * 4) + 1);
+    
+          $.notify({
+              icon: "tim-icons icon-bell-55",
+              message: message
+    
+            },{
+                type: type[1],
+                timer: 250,
+                placement: {
+                    from: from,
+                    align: align
+                }
+            });
+          }
+    
+    };
+</script>
+
 </body>
 
 </html>
