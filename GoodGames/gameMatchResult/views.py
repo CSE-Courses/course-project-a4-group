@@ -5,7 +5,7 @@ from .models import singleGameMatchResult
 # Create your views here.
 
 def gameMatchResult(request):
-    form = singleGameMatchResultForm(request.POST)
+    form = singleGameMatchResultForm(request.POST or None)
     if form.is_valid():
         form.save()
     context = {
