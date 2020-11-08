@@ -6,5 +6,5 @@ class buyNowForm(ModelForm):
     class Meta:
         model = buyNow
         fields = [
-            'name', 'address1', 'address2', 'zip_code', 'city'
+            'username','fullName', 'address1', 'address2', 'zip_code', 'city', 'item'
             ]
