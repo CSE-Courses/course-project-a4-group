@@ -1,29 +1,31 @@
 {% extends 'game/base.html' %}
 {% block content %}
-<div class="card">
-	<div class="card-body">
-		<h1 class="card-title">Game Match Result</h1>
-		<form method="POST">
-			{% csrf_token %}
-
-            {{ form.errors }}
-            {% for field in form %}
-            <div class="form-group">
-
-                {{ field.label_tag }}
-                {% for error in field.errors %}
-                    <p class="text-warning">{{ error }}</p>
-                {% endfor %}
-                {{ field }}
-                {% if field.help_text %}
-                    <p class="form-text text-muted">{{ field.help_text|safe }}</p>
-                {% endif %}
-            </div>
-            {% endfor %}
-            
-            <button type="submit" class="btn btn-fill btn-primary" onsubmit="saveResult(this)">Submit</button>
-		</form>
+<div class = "card">
+	<div class = "card-body">
+	<h1>Game Match Result</h1>
+	<form>
+	  <label for="gameTitle">Game Title:</label><br>
+	  <input type="text" id="gameTitle" name="gameTitle" value="RPS"><br><br>
+	  <label for="opponentName">Opponent Name:</label><br>
+	  <input type="text" id="opponentName" name="opponentName" value="Hartloff"><br><br>
+	  <label>Who won the match?</label><br>
+	  <input type="radio" id="you" name="you" value="you">
+	  <label for="you">You</label>
+	  <input type="radio" id="opponent" name="opponent" value="opponent">
+	  <label for="opponent">Opponent</label><br><br>
+	  <div>
+          <button type="submit" class="btn btn-fill btn-primary" onclick="saveSetting()">Submit</button>
+      </div>
+	</form> 
 	</div>
 </div>
+<script type="text/javascript">
 
+function saveSetting() {
+  functions.showNotification('top','right', 'You have successfully submitted your game match result!')
+}
+
+</script>
+
+	
 {% endblock content %}
