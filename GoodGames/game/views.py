@@ -128,7 +128,7 @@ def getData(request):
         i = i + 1
     i = 0
     ggPointsObjects = sorted(websiteObjects, key=lambda k: k['date']) 
-    ggPoints = [100000]
+    ggPoints = [500000]
     amount = 0
     while i < len(ggPointsObjects) :
         if ggPointsObjects[i]["modelName"]== "singleGameMatchHistory":
