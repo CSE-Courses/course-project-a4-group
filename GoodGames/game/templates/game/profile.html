@@ -1,0 +1,441 @@
+{% extends './base.html' %} {% load static %} {% block content %}
+
+<div class="content">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="title">GoodGames Profile</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="nav nav-pills nav-secondary" id="pills-tab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="pills-profile-tab" data-toggle="pill" href="#pills-profile"
+                                role="tab" aria-controls="pills-profile" aria-selected="true">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-stats-tab" data-toggle="pill" href="#pills-stats"
+                                role="tab" aria-controls="pills-stats" aria-selected="false">Game Stats</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-friends-tab" data-toggle="pill" href="#pills-friends"
+                                role="tab" aria-controls="pills-friends" aria-selected="false">Friends</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content mt-2 mb-3" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                            <form method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-md-6 pr-md-1">
+                                        <div class="form-group">
+                                            <label>Username</label>
+                                            <input type="text" disabled="" class="form-control" placeholder="Username"
+                                                value="{{user.get_username}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 pr-md-1">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Email address</label>
+                                            <input type="email" disabled="" class="form-control"
+                                                placeholder="email@email.com" value="{{user.email}}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 pr-md-1">
+                                        <div class="form-group">
+                                            <label>First Name</label>
+                                            <input type="text" name="firstname" class="form-control"
+                                                placeholder="First Name" value="{{user.first_name}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 pl-md-1">
+                                        <div class="form-group">
+                                            <label>Last Name</label>
+                                            <input type="text" name="lastname" class="form-control"
+                                                placeholder="Last Name" value="{{user.last_name}}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Address</label>
+                                            <input type="text" name="address" class="form-control"
+                                                placeholder="Home Address" value="{{user.profile.address}}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4 pr-md-1">
+                                        <div class="form-group">
+                                            <label>City</label>
+                                            <input type="text" name="city" class="form-control" placeholder="City"
+                                                value="{{user.profile.city}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 px-md-1">
+                                        <div class="form-group">
+                                            <label>State</label>
+                                            <select class="form-control" name="state" value="{{user.profile.state}}">
+
+                                                <option value="AL"
+                                                    {% if user.profile.state == "AL" %}selected="selected" {% endif %}>
+                                                    Alabama</option>
+                                                <option value="AK"
+                                                    {% if user.profile.state == "AK" %}selected="selected" {% endif %}>
+                                                    Alaska</option>
+                                                <option value="AZ"
+                                                    {% if user.profile.state == "AZ" %}selected="selected" {% endif %}>
+                                                    Arizona</option>
+                                                <option value="AR"
+                                                    {% if user.profile.state == "AR" %}selected="selected" {% endif %}>
+                                                    Arkansas</option>
+                                                <option value="CA"
+                                                    {% if user.profile.state == "CA" %}selected="selected" {% endif %}>
+                                                    California</option>
+                                                <option value="CO"
+                                                    {% if user.profile.state == "CO" %}selected="selected" {% endif %}>
+                                                    Colorado</option>
+                                                <option value="CT"
+                                                    {% if user.profile.state == "CT" %}selected="selected" {% endif %}>
+                                                    Connecticut</option>
+                                                <option value="DE"
+                                                    {% if user.profile.state == "DE" %}selected="selected" {% endif %}>
+                                                    Delaware</option>
+                                                <option value="DC"
+                                                    {% if user.profile.state == "DC" %}selected="selected" {% endif %}>
+                                                    District Of Columbia</option>
+                                                <option value="FL"
+                                                    {% if user.profile.state == "FL" %}selected="selected" {% endif %}>
+                                                    Florida</option>
+                                                <option value="GA"
+                                                    {% if user.profile.state == "GA" %}selected="selected" {% endif %}>
+                                                    Georgia</option>
+                                                <option value="HI"
+                                                    {% if user.profile.state == "HI" %}selected="selected" {% endif %}>
+                                                    Hawaii</option>
+                                                <option value="ID"
+                                                    {% if user.profile.state == "ID" %}selected="selected" {% endif %}>
+                                                    Idaho</option>
+                                                <option value="IL"
+                                                    {% if user.profile.state == "IL" %}selected="selected" {% endif %}>
+                                                    Illinois</option>
+                                                <option value="IN"
+                                                    {% if user.profile.state == "IN" %}selected="selected" {% endif %}>
+                                                    Indiana</option>
+                                                <option value="IA"
+                                                    {% if user.profile.state == "IA" %}selected="selected" {% endif %}>
+                                                    Iowa</option>
+                                                <option value="KS"
+                                                    {% if user.profile.state == "KS" %}selected="selected" {% endif %}>
+                                                    Kansas</option>
+                                                <option value="KY"
+                                                    {% if user.profile.state == "KY" %}selected="selected" {% endif %}>
+                                                    Kentucky</option>
+                                                <option value="LA"
+                                                    {% if user.profile.state == "LA" %}selected="selected" {% endif %}>
+                                                    Louisiana</option>
+                                                <option value="ME"
+                                                    {% if user.profile.state == "ME" %}selected="selected" {% endif %}>
+                                                    Maine</option>
+                                                <option value="MD"
+                                                    {% if user.profile.state == "MD" %}selected="selected" {% endif %}>
+                                                    Maryland</option>
+                                                <option value="MA"
+                                                    {% if user.profile.state == "MA" %}selected="selected" {% endif %}>
+                                                    Massachusetts</option>
+                                                <option value="MI"
+                                                    {% if user.profile.state == "MI" %}selected="selected" {% endif %}>
+                                                    Michigan</option>
+                                                <option value="MN"
+                                                    {% if user.profile.state == "MN" %}selected="selected" {% endif %}>
+                                                    Minnesota</option>
+                                                <option value="MS"
+                                                    {% if user.profile.state == "MS" %}selected="selected" {% endif %}>
+                                                    Mississippi</option>
+                                                <option value="MO"
+                                                    {% if user.profile.state == "MO" %}selected="selected" {% endif %}>
+                                                    Missouri</option>
+                                                <option value="MT"
+                                                    {% if user.profile.state == "MT" %}selected="selected" {% endif %}>
+                                                    Montana</option>
+                                                <option value="NE"
+                                                    {% if user.profile.state == "NE" %}selected="selected" {% endif %}>
+                                                    Nebraska</option>
+                                                <option value="NV"
+                                                    {% if user.profile.state == "NV" %}selected="selected" {% endif %}>
+                                                    Nevada</option>
+                                                <option value="NH"
+                                                    {% if user.profile.state == "NH" %}selected="selected" {% endif %}>
+                                                    New Hampshire</option>
+                                                <option value="NJ"
+                                                    {% if user.profile.state == "NJ" %}selected="selected" {% endif %}>
+                                                    New Jersey</option>
+                                                <option value="NM"
+                                                    {% if user.profile.state == "NM" %}selected="selected" {% endif %}>
+                                                    New Mexico</option>
+                                                <option value="NY"
+                                                    {% if user.profile.state == "NY" %}selected="selected" {% endif %}>
+                                                    New York</option>
+                                                <option value="NC"
+                                                    {% if user.profile.state == "NC" %}selected="selected" {% endif %}>
+                                                    North Carolina</option>
+                                                <option value="ND"
+                                                    {% if user.profile.state == "ND" %}selected="selected" {% endif %}>
+                                                    North Dakota</option>
+                                                <option value="OH"
+                                                    {% if user.profile.state == "OH" %}selected="selected" {% endif %}>
+                                                    Ohio</option>
+                                                <option value="OK"
+                                                    {% if user.profile.state == "OK" %}selected="selected" {% endif %}>
+                                                    Oklahoma</option>
+                                                <option value="OR"
+                                                    {% if user.profile.state == "OR" %}selected="selected" {% endif %}>
+                                                    Oregon</option>
+                                                <option value="PA"
+                                                    {% if user.profile.state == "PA" %}selected="selected" {% endif %}>
+                                                    Pennsylvania</option>
+                                                <option value="RI"
+                                                    {% if user.profile.state == "RI" %}selected="selected" {% endif %}>
+                                                    Rhode Island</option>
+                                                <option value="SC"
+                                                    {% if user.profile.state == "SC" %}selected="selected" {% endif %}>
+                                                    South Carolina</option>
+                                                <option value="SD"
+                                                    {% if user.profile.state == "SD" %}selected="selected" {% endif %}>
+                                                    South Dakota</option>
+                                                <option value="TN"
+                                                    {% if user.profile.state == "TN" %}selected="selected" {% endif %}>
+                                                    Tennessee</option>
+                                                <option value="TX"
+                                                    {% if user.profile.state == "TX" %}selected="selected" {% endif %}>
+                                                    Texas</option>
+                                                <option value="UT"
+                                                    {% if user.profile.state == "UT" %}selected="selected" {% endif %}>
+                                                    Utah</option>
+                                                <option value="VT"
+                                                    {% if user.profile.state == "VT" %}selected="selected" {% endif %}>
+                                                    Vermont</option>
+                                                <option value="VA"
+                                                    {% if user.profile.state == "VA" %}selected="selected" {% endif %}>
+                                                    Virginia</option>
+                                                <option value="WA"
+                                                    {% if user.profile.state == "WA" %}selected="selected" {% endif %}>
+                                                    Washington</option>
+                                                <option value="WV"
+                                                    {% if user.profile.state == "WV" %}selected="selected" {% endif %}>
+                                                    West Virginia</option>
+                                                <option value="WI"
+                                                    {% if user.profile.state == "WI" %}selected="selected" {% endif %}>
+                                                    Wisconsin</option>
+                                                <option value="WY"
+                                                    {% if user.profile.state == "WY" %}selected="selected" {% endif %}>
+                                                    Wyoming</option>
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 pl-md-1">
+                                        <div class="form-group">
+                                            <label>Postal Code</label>
+                                            <input type="number" name="zip_code" class="form-control"
+                                                placeholder="ZIP Code" value="{{user.profile.zip_code}}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>About Me</label>
+                                            <textarea rows="4" cols="80" name="bio" class="form-control"
+                                                placeholder="Here can be your description"
+                                                value="Desc">{{user.profile.bio}}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row"><!-- Row for contacts and avatar. -->
+                                    <div class="col-md-3 pr-md-1">
+                                        <div class="form-group">
+                                            <label>Avatar Image</label>
+                                            <input type="text" name="avatar" class="form-control" placeholder="https://imgur.com/aBt34F/png" value="{{user.profile.avatar_url}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 px-md-1">
+                                        <div class="form-group">
+                                            <label>Youtube Channel</label>
+                                            <input type="text" name="youtube" class="form-control" placeholder="Youtube Channel Url" value="{{user.profile.youtube_url}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 pl-md-1">
+                                        <div class="form-group">
+                                            <label>Steam Profile</label>
+                                            <input type="text" name="steam" class="form-control" placeholder="Steam Community Url" value="{{user.profile.steam_url}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 pl-md-1">
+                                        <div class="form-group">
+                                            <label>Facebook Profile</label>
+                                            <input type="text" name="facebook" class="form-control" placeholder="Facebook Profile Url" value="{{user.profile.facebook_url}}">
+                                        </div>
+                                    </div>
+                                </div><!-- Div end for contacts and avatar. -->
+
+                                <div class="card-footer">
+                                    <button name="profileButton" type="submit" class="btn btn-fill btn-primary" onclick="saveSetting()">Save</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="tab-pane fade" id="pills-stats" role="tabpanel" aria-labelledby="pills-stats-tab">
+                            <p>Below is a list of matches that you were apart of win or lose!
+                                <table class="table table-head-bg-success">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Game</th>
+                                            <th scope="col">Opponent</th>
+                                            <th scope="col">Winner</th>
+                                            <th scope="col">Wager</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="statsTable">
+
+                                    </tbody>
+                                </table>
+                            </p>
+                        </div>
+                        <div class="tab-pane fade" id="pills-friends" role="tabpanel" aria-labelledby="pills-friends-tab">
+                            <p>
+                                <h1>Add New Friend</h1>
+                                <form method="POST">
+                                    {% csrf_token %}
+
+                                    {{ form.errors }}
+                                    {% for field in form %}
+                                    <div class="form-group">
+                        
+                                        {{ field.label_tag }}
+                                        {% for error in field.errors %}
+                                            <p class="text-warning">{{ error }}</p>
+                                        {% endfor %}
+                                        {{ field }}
+                                        {% if field.help_text %}
+                                            <p class="form-text text-muted">{{ field.help_text|safe }}</p>
+                                        {% endif %}
+                                    </div>
+                                    {% endfor %}
+                                    <button name="friendButton" type="submit" class="btn btn-fill btn-primary" onclick="saveSetting()">Add</button>
+                                </form>
+                            </p>
+                            <p>
+                                <h1>Friends</h1>
+                                <table class="table table-head-bg-success">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Username</th>
+                                            <th scope="col">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="acceptedTable">
+                                        {% for req in requests %}
+                                        {% if req.accepted %}
+                                            <tr>
+                                                <td>{{req.requestee}}</td>
+                                                <td>Accepted</td>
+                                            </tr>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </p>
+                            <p>
+                                <h1>Pending Requests</h1>
+                                <table class="table table-head-bg-success">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Username</th>
+                                            <th scope="col">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="pendingTable">
+                                        {% for req in requests %}
+                                        {% if req.accepted == False %}
+                                            <tr>
+                                                <td>{{req.requestee}}</td>
+                                                <td>Pending...</td>
+                                            </tr>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </p>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card card-user">
+                <div class="card-body">
+                    <p class="card-text">
+                    <div class="author">
+                        <div class="block block-one"></div>
+                        <div class="block block-two"></div>
+                        <div class="block block-three"></div>
+                        <div class="block block-four"></div>
+
+                        <div class="avatar-wrapper">
+                            <img class="profile-pic" src="{{user.profile.avatar_url}}" />
+                        </div>
+                        <h5 class="title">{{user.first_name}} {{user.last_name}}</h5>
+                        <p class="description">
+                            GoodGames Admin
+                        </p>
+                    </div>
+                    </p>
+                    <div class="card-description">
+                        {{user.profile.bio}}
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="button-container">
+                        <button href="{{user.profile.youtube_url}}" class="btn btn-icon btn-round btn-youtube">
+                            <i class="fab fa-youtube"></i>
+                        </button>
+                        <button href="{{user.profile.steam_url}}" class="btn btn-icon btn-round btn-steam">
+                            <i class="fab fa-steam"></i>
+                        </button>
+                        <button href="{{user.profile.facebook_url}}" class="btn btn-icon btn-round btn-facebook">
+                            <i class="fab fa-facebook"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        .avatar-wrapper {
+            position: relative;
+            height: 150px;
+            width: 150px;
+            margin: 50px auto;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 1px 1px 15px -5px black;
+            transition: all 0.3s ease;
+        }
+
+        .avatar-wrapper .profile-pic {
+            height: 100%;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+
+</style>
+<script src="{% static 'stats/js/profile-stats.js' %}"></script>
+{% endblock content %}

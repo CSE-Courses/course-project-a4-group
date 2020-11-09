@@ -1,0 +1,40 @@
+{% extends 'game/base.html' %}
+{% block content %}
+
+{% if user.is_authenticated %}
+
+<div class="card">
+    <div class="card-body">
+        <h1 class="card-title">New Tournament</h1>
+        <form method="POST">
+            {% csrf_token %}
+
+            {{ form.errors }}
+            {% for field in form %}
+            <div class="form-group">
+
+                {{ field.label_tag }}
+                {% for error in field.errors %}
+                    <p class="text-warning">{{ error }}</p>
+                {% endfor %}
+                {{ field }}
+                {% if field.help_text %}
+                    <p class="form-text text-muted">{{ field.help_text|safe }}</p>
+                {% endif %}
+            </div>
+            {% endfor %}
+
+            <button type="submit" class="btn btn-primary">Create</button>
+        </form>
+
+    </div>
+</div>
+{% else %}
+<div class="card">
+<div class="card-body">
+<strong>You cant do this!</strong>
+</div>
+</div>
+{% endif %}
+
+{% endblock content %}
