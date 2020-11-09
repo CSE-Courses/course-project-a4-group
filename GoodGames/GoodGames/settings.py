@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'game.apps.GameConfig',
 	'gameMatchResult.apps.GamematchresultConfig',
+    'tournament.apps.TournamentConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
