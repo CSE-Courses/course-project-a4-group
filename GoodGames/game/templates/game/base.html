@@ -41,7 +41,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% if user.is_authenticated %}{% url 'home' %}{% else %}{% url 'login' %}{% endif %}">
+                        <a class="nav-link" href="{% if user.is_authenticated %}{% url 'myTournaments' %}{% else %}{% url 'login' %}{% endif %}">
                             <i class="tim-icons icon-trophy"></i>
                             <p>My Tournaments</p>
                         </a>
