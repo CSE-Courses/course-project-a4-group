@@ -37,7 +37,7 @@ def getMatchResults(request):
     matchHistory = singleGameMatchResult.objects.filter( Q(winner=request.user) | Q(loser=request.user))
     matchHistoryArray = []
     for match in matchHistory:
-        if match.winner == userName:
+        if match.winner == request.user:
             opponent = match.loser
         else:
             opponent = match.winner
@@ -69,7 +69,7 @@ def getData(request):
     i = 0
     matchHistoryArray = []
     while(i < gamesPlayed):
-        if matchHistory[i].winner == userName:
+        if matchHistory[i].winner == request.user:
             opponent = matchHistory[i].loser
         else:
             opponent = matchHistory[i].winner
