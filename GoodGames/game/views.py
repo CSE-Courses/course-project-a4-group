@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from .forms import buyNowForm
-from .models import buyNow
+from .forms import friendForm
+from .models import buyNow, friend
 from gameMatchResult.models import singleGameMatchResult
 from users.models import Profile
 from django.db.models import Q
@@ -29,6 +30,29 @@ def watchingAds(request):
             name = userName
         )
     return HttpResponse('')
+
+def getMatchResults(request):
+    userName = str(Profile.objects.get(user = request.user).user)
+    matchHistory = singleGameMatchResult.objects.filter( Q(winner=request.user) | Q(loser=request.user))
+    matchHistoryArray = []
+    for match in matchHistory:
+        if match.winner == userName:
+            opponent = match.loser
+        else:
+            opponent = match.winner
+        entry = {
+            "wager": match.pointsWagered,
+            "opponent": str(opponent),
+            "winner": str(match.winner),
+            "date": match.date,
+            "game": match.game,
+            "modelName": "singleGameMatchHistory"
+        }
+        matchHistoryArray.append(entry)
+    data = {
+        "matchHistory": matchHistoryArray,
+    }
+    return JsonResponse(data)
 
 def getData(request):
     winsCount = singleGameMatchResult.objects.filter(winner=request.user).count()
@@ -149,7 +173,7 @@ def dashboard(request):
     return render(request, 'game/dashboard.html')
   
 def profile(request):
-    if request.method == "POST":
+    if request.method == "POST" and "profileButton" in request.POST:
         firstname = request.POST.get("firstname")
         lastname = request.POST.get("lastname")
         address = request.POST.get("address")
@@ -174,8 +198,22 @@ def profile(request):
         request.user.profile.facebook_url = facebook
         request.user.save()
         request.user.profile.save()
+    elif request.method == "POST" and "friendButton" in request.POST:
+        friendData = friend(requester=request.user)
+        form = friendForm(request.POST, instance=friendData)
+        if form.is_valid():
+            form.save()
+    form = friendForm()
 
-    return render(request, 'game/profile.html')
+    userName = str(Profile.objects.get(user = request.user).user)
+    pendingRequests = friend.objects.filter(requester=request.user)
+
+    context = {
+        'form': form,
+        'requests' : pendingRequests,
+    }
+
+    return render(request, 'game/profile.html', context)
     
 def bracket(request):
     return render(request, 'game/bracket.html')

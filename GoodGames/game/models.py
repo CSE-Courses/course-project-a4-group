@@ -37,4 +37,9 @@ class adWatch(models.Model):
 class game(models.Model):
     name = models.CharField(max_length=100)
 
+class friend(models.Model):
+    requester = models.ForeignKey(User, on_delete=models.CASCADE, related_name="requester")
+    requestee = models.ForeignKey(User, on_delete=models.CASCADE, related_name="requestee")
+    accepted = models.BooleanField(default=False)
+
    
