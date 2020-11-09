@@ -157,6 +157,10 @@ def profile(request):
         state = request.POST.get("state")
         zip_code = request.POST.get("zip_code")
         bio = request.POST.get("bio")
+        avatar = request.POST.get("avatar")
+        youtube = request.POST.get("youtube")
+        facebook = request.POST.get("facebook")
+        steam = request.POST.get("steam")
         request.user.first_name = firstname
         request.user.last_name = lastname
         request.user.profile.address = address
@@ -164,6 +168,10 @@ def profile(request):
         request.user.profile.state = state
         request.user.profile.zip_code = zip_code
         request.user.profile.bio = bio
+        request.user.profile.avatar_url = avatar
+        request.user.profile.youtube_url = youtube
+        request.user.profile.steam_url = steam
+        request.user.profile.facebook_url = facebook
         request.user.save()
         request.user.profile.save()
 
