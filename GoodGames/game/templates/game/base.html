@@ -36,57 +36,6 @@
                 <a href="{% url 'home' %}" class="simple-text logo-normal">
           GoodGames
         </a>
-<<<<<<< Updated upstream
-      </div>
-
-      <div class="sidebar-wrapper">
-        <ul class="nav">
-          <li class="nav-item">
-            <a class="nav-link" href="{% if user.is_authenticated %}{% url 'dashboard' %}{% else %}{% url 'login' %}{% endif %}">
-              <i class="tim-icons icon-chart-pie-36"></i>
-              <p>Dashboard</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% if user.is_authenticated %}{% url 'home' %}{% else %}{% url 'login' %}{% endif %}">
-              <i class="tim-icons icon-chart-pie-36"></i>
-              <p>My Tournaments</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% if user.is_authenticated %}{% url 'home' %}{% else %}{% url 'login' %}{% endif %}">
-              <i class="tim-icons icon-chart-pie-36"></i>
-              <p>Profile</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% if user.is_authenticated %}{% url 'stats' %}{% else %}{% url 'login' %}{% endif %}">
-              <i class="tim-icons icon-chart-pie-36"></i>
-              <p>Game Stats</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% if user.is_authenticated %}{% url 'gameMatchResult-form' %}{% else %}{% url 'login' %}{% endif %}">
-              <i class="tim-icons icon-chart-pie-36"></i>
-              <p>New Game Match Result</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% if user.is_authenticated %}{% url 'shop' %}{% else %}{% url 'login' %}{% endif %}">
-              <i class="tim-icons icon-chart-pie-36"></i>
-              <p>GG Shop</p>
-            </a>
-          </li>
-          <!-- your sidebar here -->
-        </ul>
-      </div>
-    </div>
-    <div class="main-panel">
-      <!-- Navbar -->
-      <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
-        <div class="container-fluid">
-          <div class="navbar-wrapper">
-=======
             </div>
 
             <div class="sidebar-wrapper">
@@ -136,7 +85,6 @@
             <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
                 <div class="container-fluid">
                     <div class="navbar-wrapper">
->>>>>>> Stashed changes
 
                         <a class="navbar-brand" href="{% url 'home' %}">GoodGames</a>
                     </div>
