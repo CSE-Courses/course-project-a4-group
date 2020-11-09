@@ -156,6 +156,13 @@ def dashboard(request):
         "registration": registrations,
     }    
     return render(request, 'game/dashboard.html', context)
+
+def myTournaments(request):
+    tournaments = tournament.objects.filter(creator=request.user)
+    context = {
+        "tournament": tournaments
+    }
+    return render(request, 'game/myTournaments.html', context)
   
 def profile(request):
     if request.method == "POST":
