@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
-    bio = models.TextField(default=None, null=True, blank=True)
+    bio = models.TextField(default=None, null=True)
 
     balance = models.IntegerField(default=100000)
 
