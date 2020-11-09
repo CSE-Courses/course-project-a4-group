@@ -10,7 +10,7 @@ class tournament(models.Model):
     start_date = models.DateTimeField()
     no_of_players = models.IntegerField()
     game = models.ForeignKey(game, on_delete=models.SET_NULL, null=True, related_name="game")
-    completed = models.BooleanField()
+    completed = models.BooleanField(default=False)
 
 class registration(models.Model):
     player = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name="player")

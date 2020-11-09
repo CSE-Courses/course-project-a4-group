@@ -1,8 +1,11 @@
 {% extends 'game/base.html' %}
 {% block content %}
+
+{% if user.is_authenticated %}
+
 <div class="card">
     <div class="card-body">
-        <h1 class="card-title">Buy Item</h3>
+        <h1 class="card-title">New Tournament</h1>
         <form method="POST">
             {% csrf_token %}
 
@@ -21,21 +24,17 @@
             </div>
             {% endfor %}
 
-            <button type="submit" class="btn btn-primary" onclick="saveSetting()">Buy Now</button>
+            <button type="submit" class="btn btn-primary">Create</button>
         </form>
-
-        <div>
-        </div>
 
     </div>
 </div>
-<script type="text/javascript">
-
-function saveSetting() {
-  functions.showNotification('top','right', 'You have successfully submitted your order')
-}
-
-</script>
-
+{% else %}
+<div class="card">
+<div class="card-body">
+<strong>You cant do this!</strong>
+</div>
+</div>
+{% endif %}
 
 {% endblock content %}
