@@ -8,6 +8,7 @@ from users.models import Profile
 from django.db.models import Q
 from django.http import HttpResponse
 from .models import adWatch
+from tournament.models import tournament, registration, tournamentMatch
 # Create your views here.
 
 def home(request):
@@ -127,7 +128,7 @@ def getData(request):
         i = i + 1
     i = 0
     ggPointsObjects = sorted(websiteObjects, key=lambda k: k['date']) 
-    ggPoints = [100000]
+    ggPoints = [500000]
     amount = 0
     while i < len(ggPointsObjects) :
         if ggPointsObjects[i]["modelName"]== "singleGameMatchHistory":
@@ -170,7 +171,22 @@ def buy_view(request):
     return render(request, 'users/buy.html', context)
   
 def dashboard(request):
-    return render(request, 'game/dashboard.html')
+    registrations = registration.objects.filter(player=request.user)
+    tournaments = []
+    for t in registrations:
+        tournaments += tournament.objects.filter(id=t.id)
+    context = {
+        "tournament": tournaments,
+        "registration": registrations,
+    }    
+    return render(request, 'game/dashboard.html', context)
+
+def myTournaments(request):
+    tournaments = tournament.objects.filter(creator=request.user)
+    context = {
+        "tournament": tournaments
+    }
+    return render(request, 'game/myTournaments.html', context)
   
 def profile(request):
     if request.method == "POST" and "profileButton" in request.POST:
