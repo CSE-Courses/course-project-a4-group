@@ -34,4 +34,7 @@ class adWatch(models.Model):
     date = models.DateTimeField(default=now)
     modelName = models.CharField(default="adWatch", max_length=100)
 
+class game(models.Model):
+    name = models.CharField(max_length=100)
+
    
