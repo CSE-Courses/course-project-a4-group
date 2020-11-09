@@ -2,6 +2,8 @@
 {% load static  %}
 {% block content %}
 <link rel="stylesheet" href="{% static 'game/assets/css/dashboard.css' %}">
+<div class="card">
+    <div class="card-body">
 <p>
   Howdy there {{user.get_username}}! Looking to join a tournament or an event? You can find a list of active tournaments and events down below.
 </p>
@@ -89,4 +91,7 @@
           <a class="btn btn-lg btn-default btn-block" hrf="#">View More Events</a>
       </div>
   </div>
+
+</div>
+</div>
 {% endblock content %}
