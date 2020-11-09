@@ -26,7 +26,7 @@ SECRET_KEY = '^mg+%0h@vovvy4=*4n6)sbfdzj7&c*4&r9ilhnp%w9x9omu)^='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['good-games-cse442.herokuapp.com']
+ALLOWED_HOSTS = ['good-games-cse442.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'game.apps.GameConfig',
 	'gameMatchResult.apps.GamematchresultConfig',
+    'tournament.apps.TournamentConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -88,7 +89,6 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators

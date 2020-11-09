@@ -1,0 +1,78 @@
+{% extends './base.html' %}
+{%load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'ads/css/ads.css' %}">
+<div class="card">
+{% csrf_token %}
+    <div class="card-body">
+        <h1 class="header-1">Get Back In The Game!</h1>
+        <h3 class="header-1">Here you can watch ads to replenish your GG points.</h3>
+        <h4 class="header-1">After each ad watched you will earn 100 GGpoints.</h4>
+        <div>
+        <video class = "videoPlayer" id="videoPlayer"width="1050" height="600" controls>
+            <source id = "videoSource" src="{% static 'ads/videos/coke.mp4' %}" type="video/mp4">
+        </video>
+        </div>
+        <!--> <form id="new-form">
+        </form> -->
+    </div>
+</div>
+
+<script>
+let random = Math.floor((Math.random() * 6) + 1);
+let videoSource = document.querySelector('#videoSource')
+let video = document.querySelector('#videoPlayer')
+if(random === 1){
+    videoSource.setAttribute("src", "{% static 'ads/videos/coke.mp4' %}")
+}else if(random === 2){
+    videoSource.setAttribute("src", "{% static 'ads/videos/google.mp4' %}")
+}else if(random === 3){
+    videoSource.setAttribute("src", "{% static 'ads/videos/iphone.mp4' %}")
+}else if(random === 4){
+    videoSource.setAttribute("src", "{% static 'ads/videos/poptart.mp4' %}")
+}else if(random === 5){
+    videoSource.setAttribute("src", "{% static 'ads/videos/slack.mp4' %}")
+}else if(random === 6){
+    videoSource.setAttribute("src", "{% static 'ads/videos/tesla.mp4' %}")
+}
+
+video.addEventListener('ended', function(event){
+let token = document.querySelector('[name=csrfmiddlewaretoken]').value;
+event.preventDefault()
+random = Math.floor((Math.random() * 6) + 1);
+
+
+ $.ajax({
+     type: 'POST',
+     url:'watchingAds',
+    data:{
+        csrfmiddlewaretoken: token
+    },
+    success: function(){
+
+    }
+ })
+
+ video.currentTime = 0;
+if(random === 1){
+    videoSource.setAttribute("src", "{% static 'ads/videos/coke.mp4' %}")
+}else if(random === 2){
+    videoSource.setAttribute("src", "{% static 'ads/videos/google.mp4' %}")
+}else if(random === 3){
+    videoSource.setAttribute("src", "{% static 'ads/videos/iphone.mp4' %}")
+}else if(random === 4){
+    videoSource.setAttribute("src", "{% static 'ads/videos/poptart.mp4' %}")
+}else if(random === 5){
+    videoSource.setAttribute("src", "{% static 'ads/videos/slack.mp4' %}")
+}else if(random === 6){
+    videoSource.setAttribute("src", "{% static 'ads/videos/tesla.mp4' %}")
+}
+video.load();
+});
+
+</script>
+
+
+
+{% endblock content %}

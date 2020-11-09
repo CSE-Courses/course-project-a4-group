@@ -1,8 +1,11 @@
 {% extends 'game/base.html' %}
 {% block content %}
+
+{% if user.is_authenticated == False %}
+
 <div class="card">
     <div class="card-body">
-        <h1 class="card-title">Register</h3>
+        <h1 class="card-title">Register</h1>
         <form method="POST">
             {% csrf_token %}
 
@@ -21,17 +24,23 @@
             </div>
             {% endfor %}
 
-            <button type="submit" class="btn btn-primary">Sign Up</button>
+            <button type="submit" class="btn btn-primary">Sign Up!</button>
         </form>
 
         <div>
             <small>
-                Do you already have an account? <a href="{% url 'login' %}">Login</a>
+                Do you already have an account? <a href="{% url 'login' %}">Sign In</a>
             </small>
         </div>
 
     </div>
 </div>
-
+{% else %}
+<div class="card">
+<div class="card-body">
+<strong>You're already logged in silly!</strong>
+</div>
+</div>
+{% endif %}
 
 {% endblock content %}
