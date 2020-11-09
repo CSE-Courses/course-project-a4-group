@@ -6,4 +6,4 @@ from .models import buyNow, game, adWatch, friend
 admin.site.register(buyNow)
 admin.site.register(adWatch)
 admin.site.register(game)
-admin.sit.register(friend)
+admin.site.register(friend)

@@ -283,19 +283,91 @@
                                 </div><!-- Div end for contacts and avatar. -->
 
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-fill btn-primary"
-                                        onclick="saveSetting()">Save</button>
+                                    <button name="profileButton" type="submit" class="btn btn-fill btn-primary" onclick="saveSetting()">Save</button>
                                 </div>
                             </form>
                         </div>
                         <div class="tab-pane fade" id="pills-stats" role="tabpanel" aria-labelledby="pills-stats-tab">
-                            <p>
-                                Todo add our game stats here
+                            <p>Below is a list of matches that you were apart of win or lose!
+                                <table class="table table-head-bg-success">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Game</th>
+                                            <th scope="col">Opponent</th>
+                                            <th scope="col">Winner</th>
+                                            <th scope="col">Wager</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="statsTable">
+
+                                    </tbody>
+                                </table>
                             </p>
                         </div>
                         <div class="tab-pane fade" id="pills-friends" role="tabpanel" aria-labelledby="pills-friends-tab">
                             <p>
-                                Todo add our friends or make this tab into something else
+                                <h1>Add New Friend</h1>
+                                <form method="POST">
+                                    {% csrf_token %}
+
+                                    {{ form.errors }}
+                                    {% for field in form %}
+                                    <div class="form-group">
+                        
+                                        {{ field.label_tag }}
+                                        {% for error in field.errors %}
+                                            <p class="text-warning">{{ error }}</p>
+                                        {% endfor %}
+                                        {{ field }}
+                                        {% if field.help_text %}
+                                            <p class="form-text text-muted">{{ field.help_text|safe }}</p>
+                                        {% endif %}
+                                    </div>
+                                    {% endfor %}
+                                    <button name="friendButton" type="submit" class="btn btn-fill btn-primary" onclick="saveSetting()">Add</button>
+                                </form>
+                            </p>
+                            <p>
+                                <h1>Friends</h1>
+                                <table class="table table-head-bg-success">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Username</th>
+                                            <th scope="col">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="acceptedTable">
+                                        {% for req in requests %}
+                                        {% if req.accepted %}
+                                            <tr>
+                                                <td>{{req.requestee}}</td>
+                                                <td>Accepted</td>
+                                            </tr>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </p>
+                            <p>
+                                <h1>Pending Requests</h1>
+                                <table class="table table-head-bg-success">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Username</th>
+                                            <th scope="col">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="pendingTable">
+                                        {% for req in requests %}
+                                        {% if req.accepted == False %}
+                                            <tr>
+                                                <td>{{req.requestee}}</td>
+                                                <td>Pending...</td>
+                                            </tr>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
                             </p>
                         </div>
                     </div>
@@ -331,13 +403,13 @@
                 </div>
                 <div class="card-footer">
                     <div class="button-container">
-                        <button href="javascript:void(0)" class="btn btn-icon btn-round btn-youtube">
+                        <button href="{{user.profile.youtube_url}}" class="btn btn-icon btn-round btn-youtube">
                             <i class="fab fa-youtube"></i>
                         </button>
-                        <button href="javascript:void(0)" class="btn btn-icon btn-round btn-steam">
+                        <button href="{{user.profile.steam_url}}" class="btn btn-icon btn-round btn-steam">
                             <i class="fab fa-steam"></i>
                         </button>
-                        <button href="javascript:void(0)" class="btn btn-icon btn-round btn-facebook">
+                        <button href="{{user.profile.facebook_url}}" class="btn btn-icon btn-round btn-facebook">
                             <i class="fab fa-facebook"></i>
                         </button>
                     </div>
@@ -365,4 +437,5 @@
 
 
 </style>
+<script src="{% static 'stats/js/profile-stats.js' %}"></script>
 {% endblock content %}
