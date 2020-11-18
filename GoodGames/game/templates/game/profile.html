@@ -21,6 +21,10 @@
                             <a class="nav-link" id="pills-friends-tab" data-toggle="pill" href="#pills-friends"
                                 role="tab" aria-controls="pills-friends" aria-selected="false">Friends</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-buysHistory-tab" data-toggle="pill" href="#pills-buysHistory"
+                                role="tab" aria-controls="pills-buysHistory" aria-selected="false">buyHistory</a>
+                        </li>
                     </ul>
                     <div class="tab-content mt-2 mb-3" id="pills-tabContent">
                         <div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
@@ -370,6 +374,22 @@
                                 </table>
                             </p>
                         </div>
+                        <div class="tab-pane fade" id="pills-buysHistory" role="tabpanel" aria-labelledby="pills-buysHistory-tab">
+                            <p>Below is a list of Items that you bought 
+                                <table class="table table-head-bg-success">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Item</th>
+                                            <th scope="col">Price</th>
+                                            <th scope="col">Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="buysTable">
+
+                                    </tbody>
+                                </table>
+                            </p>
+                        </div>
                     </div>
 
 
@@ -438,4 +458,5 @@
 
 </style>
 <script src="{% static 'stats/js/profile-stats.js' %}"></script>
+<script src="{% static 'stats/js/buyHistory.js' %}"></script>
 {% endblock content %}
