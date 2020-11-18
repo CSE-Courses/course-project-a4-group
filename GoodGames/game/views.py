@@ -35,7 +35,36 @@ def watchingAds(request):
 def getMatchResults(request):
     userName = str(Profile.objects.get(user = request.user).user)
     matchHistory = singleGameMatchResult.objects.filter( Q(winner=request.user) | Q(loser=request.user))
+    buyNowObjects= buyNow.objects.filter(username = userName)
+    buyNowArray = []
     matchHistoryArray = []
+    price = 0
+    for buy in buyNowObjects: 
+        if buy.item == "Ps4":
+            price = 99000
+        elif buy.item == "Ps4_Controller":
+            price = 10000
+        elif buy.item == "Xbox":
+            price = 99000
+        elif buy.item == "Xbox_Controller":
+            price = 99000
+        elif buy.item == "Madden":
+            price = 99000
+        elif buy.item == "Nba2k21":
+            price = 99000
+        elif buy.item == "Gaming_Monitor":
+            price = 99000
+        elif buy.item == "Gaming_Headset":
+            price = 99000
+        else:
+            price = 0
+        entry = {
+            "item": buy.item,
+            "price": price,
+            "date": buy.date
+        }
+        buyNowArray.append(entry)
+
     for match in matchHistory:
         if match.winner == request.user:
             opponent = match.loser
@@ -52,6 +81,7 @@ def getMatchResults(request):
         matchHistoryArray.append(entry)
     data = {
         "matchHistory": matchHistoryArray,
+        "buyNow": buyNowArray,
     }
     return JsonResponse(data)
 
@@ -120,6 +150,7 @@ def getData(request):
             price = 0
 
         buyNowObject = {
+            "item": buyNowArray[i].item,
             "price": price,
             "date": buyNowArray[i].date,
             "modelName": buyNowArray[i].modelName
@@ -128,9 +159,10 @@ def getData(request):
         i = i + 1
     i = 0
     ggPointsObjects = sorted(websiteObjects, key=lambda k: k['date']) 
+    buyNowObjects = []
     ggPoints = [500000]
     amount = 0
-    while i < len(ggPointsObjects) :
+    while i < len(ggPointsObjects):
         if ggPointsObjects[i]["modelName"]== "singleGameMatchHistory":
             if ggPointsObjects[i]["winner"] == userName:
                 amount = ggPoints[i] + ggPointsObjects[i]["wager"]
@@ -140,6 +172,7 @@ def getData(request):
             amount = ggPoints[i] + 100
         elif ggPointsObjects[i]["modelName"] == "buyNow":
             amount = ggPoints[i] - ggPointsObjects[i]["price"]
+            buyNowObjects.append(ggPointsObjects[i])
         ggPoints.append(amount)
         i = i + 1 
 
@@ -151,6 +184,7 @@ def getData(request):
         "gamesPlayed": gamesPlayed,
         "ggPoints": ggPoints,
         "matchHistory": matchHistoryArray,
+        "buyNow": buyNowObjects,
         "madden": maddenCount, 
         "valorant": valorantCount,
         "nba2k21": nbaCount, 
