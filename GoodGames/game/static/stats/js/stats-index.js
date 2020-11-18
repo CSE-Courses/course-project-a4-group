@@ -7,11 +7,7 @@ const getStats = async () => {
     throw new Error('Unable to get stats')
     } }
 
-    /*getStats().then((data) => { 
-        console.log(data)
-    }).catch((err) => { console.log(`Error: ${err}`)
-    })
-*/
+
 const displayStats = async () => {
     const data = await getStats()
     console.log(data.username)
