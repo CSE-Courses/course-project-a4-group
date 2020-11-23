@@ -15,6 +15,7 @@ urlpatterns = [
     path('bracket/', views.bracket, name='bracket'),
     path('ads/', views.ads, name='ads'),
     path('ads/watchingAds', views.watchingAds, name='watching-ads'),
-    path('myTournaments/', views.myTournaments, name='myTournaments')
+    path('myTournaments/', views.myTournaments, name='myTournaments'),
+    path('joinTournaments/', views.joinTournaments, name='joinTournaments')
 ]
 
