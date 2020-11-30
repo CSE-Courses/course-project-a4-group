@@ -224,8 +224,10 @@ def myTournaments(request):
 
 def joinTournaments(request):
     registrations = registration.objects.filter(player=request.user)
-    registrationIds = [t.id for t in registrations]
-    tournaments = tournament.objects.exclude(id=registrationIds)
+    registrationIds = []
+    for t in registrations:
+        registrationIds.append(t.id)
+    tournaments = tournament.objects.exclude(id__in = registrationIds)
     context = {
         "tournament": tournaments,
         "registration": registrations,
