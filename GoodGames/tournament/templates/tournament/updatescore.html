@@ -1,0 +1,12 @@
+{% extends 'game/base.html' %} {% block content %}
+<h2>Update your score!</h2>
+<form method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+  <label>Winner</label>
+  <select name="winner" class="form-control">
+    <option value="{{match.p1.id}}" style="color: black">{{match.p1.player}}</option>
+    <option value="{{match.p2.id}}" style="color: black">{{match.p2.player}}</option>
+  </select>
+  <button name="update" type="submit" class="btn btn-fill btn-primary">Save</button>
+</form>
+{% endblock %}

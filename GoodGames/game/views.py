@@ -96,6 +96,10 @@ def getData(request):
     nbaCount = singleGameMatchResult.objects.filter(game = "nba2k21").count()
     fifaCount = singleGameMatchResult.objects.filter(game = "fifa21").count()
     nhlCount = singleGameMatchResult.objects.filter(game = "nhl21").count()
+
+    registrations = registration.objects.filter(player = request.user)
+    
+
     i = 0
     matchHistoryArray = []
     while(i < gamesPlayed):
@@ -115,7 +119,24 @@ def getData(request):
         matchHistoryArray.append(entry)
         i = i + 1
     i = 0
-    websiteObjects = matchHistoryArray
+    websiteObjects = matchHistoryArray.copy()
+    i=0
+    for reg in registrations:
+        points = 0
+        if reg.tournament.winner == request.user:
+            points = reg.tournament.no_of_players * reg.tournament.wager - reg.tournament.wager
+        else:
+            points -= reg.tournament.wager
+
+        entry = {
+            'points': points,
+            'date': reg.tournament.start_date,
+            'modelName': 'tournament'
+        }
+
+        websiteObjects.append(entry)
+
+
     ggPoints = []
     buyNowArray = buyNow.objects.filter(username = userName)
     adWatchArray = adWatch.objects.filter(username = userName)
@@ -157,9 +178,13 @@ def getData(request):
         }
         websiteObjects.append(buyNowObject)
         i = i + 1
+
+
+    
     i = 0
     ggPointsObjects = sorted(websiteObjects, key=lambda k: k['date'])
     buyNowObjects = []
+
     ggPoints = [500000]
     amount = 0
     while i < len(ggPointsObjects):
@@ -173,6 +198,8 @@ def getData(request):
         elif ggPointsObjects[i]["modelName"] == "buyNow":
             amount = ggPoints[i] - ggPointsObjects[i]["price"]
             buyNowObjects.append(ggPointsObjects[i])
+        elif ggPointsObjects[i]['modelName'] == 'tournament':
+            amount = ggPoints[i] + ggPointsObjects[i]['points']
         ggPoints.append(amount)
         i = i + 1
 
@@ -206,11 +233,7 @@ def buy_view(request):
 
 def dashboard(request):
     registrations = registration.objects.filter(player=request.user)
-    tournaments = []
-    for t in registrations:
-        tournaments += tournament.objects.filter(id=t.id)
     context = {
-        "tournament": tournaments,
         "registration": registrations,
     }
     return render(request, 'game/dashboard.html', context)

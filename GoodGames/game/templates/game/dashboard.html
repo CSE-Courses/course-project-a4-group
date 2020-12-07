@@ -1,55 +1,53 @@
-{% extends './base.html' %}
-{% load static  %}
-{% block content %}
-<link rel="stylesheet" href="{% static 'game/assets/css/dashboard.css' %}">
+{% extends './base.html' %} {% load static %} {% block content %}
+<link rel="stylesheet" href="{% static 'game/assets/css/dashboard.css' %}" />
 <div class="card">
-    <div class="card-body">
-        <h2 style="display: inline-block;">
-            Hello there
-        <p style="font-weight: bold; display: inline;"> {{user.get_username}}</p>! Here is a list of the tournaments you
-        are currently participating in.
-        </h2>
-        <h1>Active Tournaments</h1>
-        <div class="list -four">
-            <div class="search-result-card">
-                <div class="body">
-                    {% for t in tournament %}
-                    <div class="user-details">
-                        <div class="img">
-                            <!-- Add created user's profile avatar here <img src="" style="width:40px;height:40px;"> -->
-                        </div>
-                        <div class="name -break" id="">
-                            <strong>{{t.name}}</strong>
-                        </div>
-                    </div>
-                    <ul class="list-details">
-                        <li>
-                            <!-- Add a small icon image for valorant game here -->
-                            <span class="text">{{t.game.name}}</span>
-                        </li>
-                        <li>
-                            <!-- Add an icon image for particant png here -->
-                            <span class="text">{{t.no_of_players}} participants</span>
-                        </li>
-                        <li>
-                            <!-- Add a calendar icon image here -->
-                            <span class="text">Starts on {{t.start_date}}</span>
-                        </li>
-                        <li>
-                            <span class="text">Created on {{t.start_date}}</span>
-                        </li>
-                    </ul>
-                    <div class="actions">
-                        <a class="btn btn-block btn-default" href="{% url 'tournamentView' tid=t.id %}">View</a>
-                    </div>
-                    <br>
-                    {% empty %}
-                    <h3>Your currently are not in any active tournaments.</h3>
-                    {% endfor %}
-                </div>
+  <div class="card-body">
+    <h2 style="display: inline-block">
+      Hello there
+      <p style="font-weight: bold; display: inline">{{user.get_username}}</p>
+      ! Here is a list of the tournaments you are currently participating in.
+    </h2>
+    <h1>Active Tournaments</h1>
+    <div class="list -four">
+      <div class="search-result-card">
+        <div class="body">
+          {% for r in registration %}
+          <div class="user-details">
+            <div class="img">
+              <!-- Add created user's profile avatar here <img src="" style="width:40px;height:40px;"> -->
             </div>
+            <div class="name -break" id="">
+              <strong>{{r.tournament.name}}</strong>
+            </div>
+          </div>
+          <ul class="list-details">
+            <li>
+              <!-- Add a small icon image for valorant game here -->
+              <span class="text">{{r.tournament.game.name}}</span>
+            </li>
+            <li>
+              <!-- Add an icon image for particant png here -->
+              <span class="text">{{r.tournament.no_of_players}} participants</span>
+            </li>
+            <li>
+              <!-- Add a calendar icon image here -->
+              <span class="text">Starts on {{r.tournament.start_date}}</span>
+            </li>
+            <li>
+              <span class="text">Created on {{r.tournament.start_date}}</span>
+            </li>
+          </ul>
+          <div class="actions">
+            <a class="btn btn-block btn-default" href="{% url 'tournamentView' tid=r.tournament.id %}">View</a>
+          </div>
+          <br />
+          {% empty %}
+          <h3>Your currently are not in any active tournaments.</h3>
+          {% endfor %}
         </div>
-        <br>
+      </div>
     </div>
+    <br />
+  </div>
 </div>
 {% endblock content %}
