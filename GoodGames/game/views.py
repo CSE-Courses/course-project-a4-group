@@ -174,6 +174,36 @@ def profile(request):
         request.user.profile.facebook_url = facebook
         request.user.save()
         request.user.profile.save()
+<<<<<<< Updated upstream
+=======
+    elif request.method == "POST" and "acceptButton" in request.POST:
+        modid = request.POST.get('friend_id')
+        fq = friend.objects.get(id=modid)
+        fq.accepted = True
+        fq.save()
+    elif request.method == "POST" and "declineButton" in request.POST:
+        modid = request.POST.get('friend_id')
+        fq = friend.objects.get(id=modid)
+        fq.delete()
+    elif request.method == "POST" and "deleteButton" in request.POST:
+        modid = request.POST.get('friend_id')
+        fq = friend.objects.get(id=modid)
+        fq.delete()
+    elif request.method == "POST" and "friendButton" in request.POST:
+        friendData = friend(requester=request.user)
+        form = friendForm(request.POST, instance=friendData)
+        if form.is_valid():
+            form.save()
+    form = friendForm()
+
+    userName = str(Profile.objects.get(user = request.user).user)
+    pendingRequests = friend.objects.filter(requester=request.user)
+
+    context = {
+        'form': form,
+        'requests' : pendingRequests,
+    }
+>>>>>>> Stashed changes
 
     return render(request, 'game/profile.html')
     

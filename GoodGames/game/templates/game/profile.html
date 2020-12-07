@@ -295,7 +295,100 @@
                         </div>
                         <div class="tab-pane fade" id="pills-friends" role="tabpanel" aria-labelledby="pills-friends-tab">
                             <p>
+<<<<<<< Updated upstream
                                 Todo add our friends or make this tab into something else
+=======
+                                <h1>Add New Friend</h1>
+                                <form method="POST">
+                                    {% csrf_token %}
+
+                                    {{ form.errors }}
+                                    {% for field in form %}
+                                    <div class="form-group">
+                        
+                                        {{ field.label_tag }}
+                                        {% for error in field.errors %}
+                                            <p class="text-warning">{{ error }}</p>
+                                        {% endfor %}
+                                        {{ field }}
+                                        {% if field.help_text %}
+                                            <p class="form-text text-muted">{{ field.help_text|safe }}</p>
+                                        {% endif %}
+                                    </div>
+                                    {% endfor %}
+                                    <button name="friendButton" type="submit" class="btn btn-fill btn-primary" onclick="saveSetting()">Add</button>
+                                </form>
+                            </p>
+                            <p>
+                                <h1>Friends</h1>
+                                <table class="table table-head-bg-success">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Username</th>
+                                            <th scope="col" style="width: 40%">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="acceptedTable">
+                                        {% for req in requests %}
+                                        {% if req.accepted %}
+                                            <tr>
+                                                <td>{{req.requestee}}</td>
+                                                <td>
+                                                    <form method="POST">
+                                                        {% csrf_token %}
+                                                        <input type="hidden" value="{{req.id}}" name="friend_id">
+                                                        <button type="submit" name="deleteButton" data-toggle="tooltip" class="btn btn-link btn-danger btn-lg" title="Delete Friend">
+                                                            <i class="fas fa-times-circle"></i>
+                                                            Delete
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </p>
+                            <p>
+                                <h1>Pending Requests</h1>
+                                <table class="table table-head-bg-success">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Username</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col" style="width: 40%">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="pendingTable">
+                                        {% for req in requests %}
+                                        {% if req.accepted == False %}
+                                            <tr>
+                                                <td>{{req.requestee}}</td>
+                                                <td>Pending...</td>
+                                                <td>
+                                                    <form method="POST">
+                                                        {% csrf_token %}
+                                                        <input type="hidden" value="{{req.id}}" name="friend_id">
+                                                        <button type="submit" name="acceptButton" data-toggle="tooltip" class="btn btn-link btn-success btn-lg" title="Accept Request">
+                                                            <i class="fas fa-check-circle"></i>
+                                                            Accept
+                                                        </button>
+                                                    </form>
+                                                    <form method="POST">
+                                                        {% csrf_token %}
+                                                        <input type="hidden" value="{{req.id}}" name="friend_id">
+                                                        <button type="submit" name="declineButton" data-toggle="tooltip" class="btn btn-link btn-danger btn-lg" title="Decline Request">
+                                                            <i class="fas fa-times-circle"></i>
+                                                            Decline
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+>>>>>>> Stashed changes
                             </p>
                         </div>
                     </div>
