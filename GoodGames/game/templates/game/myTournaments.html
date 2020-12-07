@@ -5,49 +5,53 @@
 <div class="card">
     <div class="card-body">
         <h2 style="display: inline-block;">
-        Here is a list of the tournaments you have created.
+            Here is a list of the tournaments you have created.
         </h2>
         <h1>Your Tournaments</h1>
         <div class="list -four">
             <div class="search-result-card">
                 <div class="body">
+                    <div class="row"></div>
                     {% for t in tournament %}
-                    <div class="user-details">
-                        <div class="img">
-                            <!-- Add created user's profile avatar here <img src="" style="width:40px;height:40px;"> -->
-                        </div>
-                        <div class="name -break" id="">
-                            <strong>{{t.name}}</strong>
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-header">
+                                <h2>{{t.name}}</h2>
+                            </div>
+                            <div class="card-body">
+                                <ul class="list-details">
+                                    <li>
+                                        <!-- Add a small icon image for valorant game here -->
+                                        <span class="text">{{t.game.name}}</span>
+                                    </li>
+                                    <li>
+                                        <!-- Add an icon image for particant png here -->
+                                        <span class="text">{{t.no_of_players}} participants</span>
+                                    </li>
+                                    <li>
+                                        <!-- Add a calendar icon image here -->
+                                        <span class="text">Starts on {{t.start_date}}</span>
+                                    </li>
+                                    <li>
+                                        <span class="text">Created on {{t.start_date}}</span>
+                                    </li>
+                                </ul>
+                                <div class="actions">
+                                    <a class="btn btn-block btn-default"
+                                        href="{% url 'tournamentView' tid=t.id %}">View</a>
+                                </div>
+                                <br>
+                            </div>
                         </div>
                     </div>
-                    <ul class="list-details">
-                        <li>
-                            <!-- Add a small icon image for valorant game here -->
-                            <span class="text">{{t.game.name}}</span>
-                        </li>
-                        <li>
-                            <!-- Add an icon image for particant png here -->
-                            <span class="text">{{t.no_of_players}} participants</span>
-                        </li>
-                        <li>
-                            <!-- Add a calendar icon image here -->
-                            <span class="text">Starts on {{t.start_date}}</span>
-                        </li>
-                        <li>
-                            <span class="text">Created on {{t.start_date}}</span>
-                        </li>
-                    </ul>
-                    <div class="actions">
-                        <a class="btn btn-block btn-default" href="{% url 'tournamentView' tid=t.id %}">View</a>
-                    </div>
-                    <br>
                     {% empty %}
                     <h3>You currently do not have any created tournaments.</h3>
                     {% endfor %}
                 </div>
             </div>
         </div>
-        <br>
     </div>
+    <br>
+</div>
 </div>
 {% endblock content %}
