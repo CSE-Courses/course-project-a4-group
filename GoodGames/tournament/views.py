@@ -41,7 +41,7 @@ def updateScore(request, id=0):
     context = {
         'match': match,
     }
-    return render(request, 'tournament/updateScore.html', context)
+    return render(request, 'tournament/updatescore.html', context)
 
 def tournament(request, tid=0):
     tm = t_db.objects.get(id=tid)
