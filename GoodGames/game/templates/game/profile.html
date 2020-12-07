@@ -21,6 +21,10 @@
                             <a class="nav-link" id="pills-friends-tab" data-toggle="pill" href="#pills-friends"
                                 role="tab" aria-controls="pills-friends" aria-selected="false">Friends</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-buysHistory-tab" data-toggle="pill" href="#pills-buysHistory"
+                                role="tab" aria-controls="pills-buysHistory" aria-selected="false">buyHistory</a>
+                        </li>
                     </ul>
                     <div class="tab-content mt-2 mb-3" id="pills-tabContent">
                         <div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
@@ -313,7 +317,7 @@
                                     {{ form.errors }}
                                     {% for field in form %}
                                     <div class="form-group">
-                        
+
                                         {{ field.label_tag }}
                                         {% for error in field.errors %}
                                             <p class="text-warning">{{ error }}</p>
@@ -333,15 +337,30 @@
                                     <thead>
                                         <tr>
                                             <th scope="col">Username</th>
-                                            <th scope="col">Status</th>
+                                            <th scope="col" style="width: 40%">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody id="acceptedTable">
                                         {% for req in requests %}
                                         {% if req.accepted %}
                                             <tr>
-                                                <td>{{req.requestee}}</td>
-                                                <td>Accepted</td>
+                                                <td>
+                                                    {% if req.requester.get_username == user.get_username %}
+                                                        {{req.requestee.get_username}}
+                                                    {% else %}
+                                                        {{req.requester.get_username}}
+                                                    {% endif %}
+                                                </td>
+                                                <td>
+                                                    <form method="POST">
+                                                        {% csrf_token %}
+                                                        <input type="hidden" value="{{req.id}}" name="friend_id">
+                                                        <button type="submit" name="deleteButton" data-toggle="tooltip" class="btn btn-link btn-danger btn-lg" title="Delete Friend">
+                                                            <i class="fas fa-times-circle"></i>
+                                                            Delete
+                                                        </button>
+                                                    </form>
+                                                </td>
                                             </tr>
                                         {% endif %}
                                         {% endfor %}
@@ -355,17 +374,66 @@
                                         <tr>
                                             <th scope="col">Username</th>
                                             <th scope="col">Status</th>
+                                            <th scope="col" style="width: 40%">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody id="pendingTable">
                                         {% for req in requests %}
                                         {% if req.accepted == False %}
                                             <tr>
-                                                <td>{{req.requestee}}</td>
-                                                <td>Pending...</td>
+                                                <td>
+                                                    {% if req.requester.get_username == user.get_username %}
+                                                        {{req.requestee.get_username}}
+                                                    {% else %}
+                                                        {{req.requester.get_username}}
+                                                    {% endif %}
+                                                </td>
+                                                <td>
+                                                    {% if req.requester.get_username == user.get_username %}
+                                                        Outgoing friend request
+                                                    {% else %}
+                                                        Incoming friend request
+                                                    {% endif %}
+                                                </td>
+                                                <td>
+                                                    {% if req.requestee.get_username == user.get_username %}
+                                                    <form method="POST">
+                                                        {% csrf_token %}
+                                                        <input type="hidden" value="{{req.id}}" name="friend_id">
+                                                        <button type="submit" name="acceptButton" data-toggle="tooltip" class="btn btn-link btn-success btn-lg" title="Accept Request">
+                                                            <i class="fas fa-check-circle"></i>
+                                                            Accept
+                                                        </button>
+                                                    </form>
+                                                    {% endif %}
+                                                    <form method="POST">
+                                                        {% csrf_token %}
+                                                        <input type="hidden" value="{{req.id}}" name="friend_id">
+                                                        <button type="submit" name="declineButton" data-toggle="tooltip" class="btn btn-link btn-danger btn-lg" title="Decline Request">
+                                                            <i class="fas fa-times-circle"></i>
+                                                            Decline
+                                                        </button>
+                                                    </form>
+                                                </td>
                                             </tr>
                                         {% endif %}
                                         {% endfor %}
+                                    </tbody>
+                                </table>
+                            </p>
+                        </div>
+                        <div class="tab-pane fade" id="pills-buysHistory" role="tabpanel" aria-labelledby="pills-buysHistory-tab">
+                            <p>Below is a list of Items that you bought 
+                                <table class="table table-head-bg-success">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Item</th>
+                                            <th scope="col">Price</th>
+                                            <th scope="col">Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="buysTable">
+
                                     </tbody>
                                 </table>
                             </p>
@@ -377,7 +445,7 @@
 
             </div>
         </div>
-
+        
         <div class="col-md-4">
             <div class="card card-user">
                 <div class="card-body">
@@ -438,4 +506,5 @@
 
 </style>
 <script src="{% static 'stats/js/profile-stats.js' %}"></script>
+<script src="{% static 'stats/js/buyHistory.js' %}"></script>
 {% endblock content %}
