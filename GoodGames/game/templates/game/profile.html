@@ -310,7 +310,6 @@
                         </div>
                         <div class="tab-pane fade" id="pills-friends" role="tabpanel" aria-labelledby="pills-friends-tab">
                             <p>
-=======
                                 <h1>Add New Friend</h1>
                                 <form method="POST">
                                     {% csrf_token %}
@@ -379,6 +378,7 @@
                                                 <td>{{req.requestee}}</td>
                                                 <td>Pending...</td>
                                                 <td>
+                                                    {% if req.requestee == user.name %}
                                                     <form method="POST">
                                                         {% csrf_token %}
                                                         <input type="hidden" value="{{req.id}}" name="friend_id">
@@ -387,6 +387,7 @@
                                                             Accept
                                                         </button>
                                                     </form>
+                                                    {% endif %}
                                                     <form method="POST">
                                                         {% csrf_token %}
                                                         <input type="hidden" value="{{req.id}}" name="friend_id">
@@ -401,7 +402,6 @@
                                         {% endfor %}
                                     </tbody>
                                 </table>
->>>>>>> Stashed changes
                             </p>
                         </div>
                     </div>

@@ -260,7 +260,6 @@ def profile(request):
         request.user.profile.facebook_url = facebook
         request.user.save()
         request.user.profile.save()
-<<<<<<< Updated upstream
     elif request.method == "POST" and "friendButton" in request.POST:
         friendData = friend(requester=request.user)
         form = friendForm(request.POST, instance=friendData)
@@ -275,8 +274,6 @@ def profile(request):
         'form': form,
         'requests' : pendingRequests,
     }
->>>>>>> Stashed changes
-
     return render(request, 'game/profile.html', context)
 
 def bracket(request):
