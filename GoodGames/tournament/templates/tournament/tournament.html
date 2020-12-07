@@ -4,7 +4,7 @@
   <div class="card-header d-flex justify-content-between">
     <h1>{{tournament.name}}</h1>
     {% if tournament.winner %}
-    <h1>{{ tournamant.winner }} has won the tournament!</h1>
+    <h1>{{ tournament.winner }} has won the tournament!</h1>
     {% endif %} {% if tournament.started == False %}
     <form method="POST">
       {% csrf_token %}
