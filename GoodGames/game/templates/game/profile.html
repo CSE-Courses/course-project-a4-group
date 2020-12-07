@@ -21,6 +21,10 @@
                             <a class="nav-link" id="pills-friends-tab" data-toggle="pill" href="#pills-friends"
                                 role="tab" aria-controls="pills-friends" aria-selected="false">Friends</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-buysHistory-tab" data-toggle="pill" href="#pills-buysHistory"
+                                role="tab" aria-controls="pills-buysHistory" aria-selected="false">buyHistory</a>
+                        </li>
                     </ul>
                     <div class="tab-content mt-2 mb-3" id="pills-tabContent">
                         <div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
@@ -283,20 +287,29 @@
                                 </div><!-- Div end for contacts and avatar. -->
 
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-fill btn-primary"
-                                        onclick="saveSetting()">Save</button>
+                                    <button name="profileButton" type="submit" class="btn btn-fill btn-primary" onclick="saveSetting()">Save</button>
                                 </div>
                             </form>
                         </div>
                         <div class="tab-pane fade" id="pills-stats" role="tabpanel" aria-labelledby="pills-stats-tab">
-                            <p>
-                                Todo add our game stats here
+                            <p>Below is a list of matches that you were apart of win or lose!
+                                <table class="table table-head-bg-success">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Game</th>
+                                            <th scope="col">Opponent</th>
+                                            <th scope="col">Winner</th>
+                                            <th scope="col">Wager</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="statsTable">
+
+                                    </tbody>
+                                </table>
                             </p>
                         </div>
                         <div class="tab-pane fade" id="pills-friends" role="tabpanel" aria-labelledby="pills-friends-tab">
                             <p>
-<<<<<<< Updated upstream
-                                Todo add our friends or make this tab into something else
 =======
                                 <h1>Add New Friend</h1>
                                 <form method="POST">
@@ -305,7 +318,7 @@
                                     {{ form.errors }}
                                     {% for field in form %}
                                     <div class="form-group">
-                        
+
                                         {{ field.label_tag }}
                                         {% for error in field.errors %}
                                             <p class="text-warning">{{ error }}</p>
@@ -424,13 +437,13 @@
                 </div>
                 <div class="card-footer">
                     <div class="button-container">
-                        <button href="javascript:void(0)" class="btn btn-icon btn-round btn-youtube">
+                        <button href="{{user.profile.youtube_url}}" class="btn btn-icon btn-round btn-youtube">
                             <i class="fab fa-youtube"></i>
                         </button>
-                        <button href="javascript:void(0)" class="btn btn-icon btn-round btn-steam">
+                        <button href="{{user.profile.steam_url}}" class="btn btn-icon btn-round btn-steam">
                             <i class="fab fa-steam"></i>
                         </button>
-                        <button href="javascript:void(0)" class="btn btn-icon btn-round btn-facebook">
+                        <button href="{{user.profile.facebook_url}}" class="btn btn-icon btn-round btn-facebook">
                             <i class="fab fa-facebook"></i>
                         </button>
                     </div>
@@ -458,4 +471,6 @@
 
 
 </style>
+<script src="{% static 'stats/js/profile-stats.js' %}"></script>
+<script src="{% static 'stats/js/buyHistory.js' %}"></script>
 {% endblock content %}

@@ -17,7 +17,6 @@
     <!-- Black Dashboard CSS -->
     <link href="{% static 'game/assets/css/black-dashboard.css' %}" rel="stylesheet" />
     <link href="{% static 'game/assets/css/nucleo-icons.css' %}" rel="stylesheet" />
-    <link href="{% static 'game/assets/css/bracket.css' %}" rel="stylesheet" />
 </head>
 
 <body>
@@ -41,7 +40,13 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% if user.is_authenticated %}{% url 'home' %}{% else %}{% url 'login' %}{% endif %}">
+                        <a class="nav-link" href="{% if user.is_authenticated %}{% url 'joinTournaments' %}{% else %}{% url 'login' %}{% endif %}">
+                            <i class="tim-icons icon-controller"></i>
+                            <p>Join Tournaments</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% if user.is_authenticated %}{% url 'myTournaments' %}{% else %}{% url 'login' %}{% endif %}">
                             <i class="tim-icons icon-trophy"></i>
                             <p>My Tournaments</p>
                         </a>
@@ -68,6 +73,18 @@
                         <a class="nav-link" href="{% if user.is_authenticated %}{% url 'shop' %}{% else %}{% url 'login' %}{% endif %}">
                             <i class="tim-icons icon-cart"></i>
                             <p>GG Shop</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% if user.is_authenticated %}{% url 'newTournament' %}{% else %}{% url 'login' %}{% endif %}">
+                            <i class="tim-icons icon-pencil"></i>
+                            <p>New Tournament</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% if user.is_authenticated %}{% url 'ads' %}{% else %}{% url 'login' %}{% endif %}">
+                            <i class="tim-icons icon-money-coins"></i>
+                            <p>Get Back in the Game</p>
                         </a>
                     </li>
                     <!-- your sidebar here -->

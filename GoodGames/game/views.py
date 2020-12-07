@@ -1,12 +1,14 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from .forms import buyNowForm
-from .models import buyNow
+from .forms import friendForm
+from .models import buyNow, friend
 from gameMatchResult.models import singleGameMatchResult
 from users.models import Profile
 from django.db.models import Q
 from django.http import HttpResponse
 from .models import adWatch
+from tournament.models import tournament, registration, tournamentMatch
 # Create your views here.
 
 def home(request):
@@ -30,6 +32,59 @@ def watchingAds(request):
         )
     return HttpResponse('')
 
+def getMatchResults(request):
+    userName = str(Profile.objects.get(user = request.user).user)
+    matchHistory = singleGameMatchResult.objects.filter( Q(winner=request.user) | Q(loser=request.user))
+    buyNowObjects= buyNow.objects.filter(username = userName)
+    buyNowArray = []
+    matchHistoryArray = []
+    price = 0
+    for buy in buyNowObjects:
+        if buy.item == "Ps4":
+            price = 99000
+        elif buy.item == "Ps4_Controller":
+            price = 10000
+        elif buy.item == "Xbox":
+            price = 99000
+        elif buy.item == "Xbox_Controller":
+            price = 99000
+        elif buy.item == "Madden":
+            price = 99000
+        elif buy.item == "Nba2k21":
+            price = 99000
+        elif buy.item == "Gaming_Monitor":
+            price = 99000
+        elif buy.item == "Gaming_Headset":
+            price = 99000
+        else:
+            price = 0
+        entry = {
+            "item": buy.item,
+            "price": price,
+            "date": buy.date
+        }
+        buyNowArray.append(entry)
+
+    for match in matchHistory:
+        if match.winner == request.user:
+            opponent = match.loser
+        else:
+            opponent = match.winner
+        entry = {
+            "wager": match.pointsWagered,
+            "opponent": str(opponent),
+            "winner": str(match.winner),
+            "date": match.date,
+            "game": match.game,
+            "modelName": "singleGameMatchHistory"
+        }
+        matchHistoryArray.append(entry)
+    data = {
+        "matchHistory": matchHistoryArray,
+        "buyNow": buyNowArray,
+    }
+    return JsonResponse(data)
+
 def getData(request):
     winsCount = singleGameMatchResult.objects.filter(winner=request.user).count()
     lossCount = singleGameMatchResult.objects.filter(loser=request.user).count()
@@ -44,11 +99,11 @@ def getData(request):
     i = 0
     matchHistoryArray = []
     while(i < gamesPlayed):
-        if matchHistory[i].winner == userName:
+        if matchHistory[i].winner == request.user:
             opponent = matchHistory[i].loser
         else:
             opponent = matchHistory[i].winner
-        
+
         entry = {
             "wager": matchHistory[i].pointsWagered,
             "opponent": str(opponent),
@@ -58,7 +113,7 @@ def getData(request):
             "modelName": "singleGameMatchHistory"
         }
         matchHistoryArray.append(entry)
-        i = i + 1 
+        i = i + 1
     i = 0
     websiteObjects = matchHistoryArray
     ggPoints = []
@@ -71,7 +126,7 @@ def getData(request):
             "modelName":adWatchArray[i].modelName
         }
         websiteObjects.append(adWatchObject)
-        i = i + 1 
+        i = i + 1
     i = 0
     while i < buyNowArray.count():
         price = 0
@@ -95,6 +150,7 @@ def getData(request):
             price = 0
 
         buyNowObject = {
+            "item": buyNowArray[i].item,
             "price": price,
             "date": buyNowArray[i].date,
             "modelName": buyNowArray[i].modelName
@@ -102,10 +158,11 @@ def getData(request):
         websiteObjects.append(buyNowObject)
         i = i + 1
     i = 0
-    ggPointsObjects = sorted(websiteObjects, key=lambda k: k['date']) 
-    ggPoints = [100000]
+    ggPointsObjects = sorted(websiteObjects, key=lambda k: k['date'])
+    buyNowObjects = []
+    ggPoints = [500000]
     amount = 0
-    while i < len(ggPointsObjects) :
+    while i < len(ggPointsObjects):
         if ggPointsObjects[i]["modelName"]== "singleGameMatchHistory":
             if ggPointsObjects[i]["winner"] == userName:
                 amount = ggPoints[i] + ggPointsObjects[i]["wager"]
@@ -115,20 +172,22 @@ def getData(request):
             amount = ggPoints[i] + 100
         elif ggPointsObjects[i]["modelName"] == "buyNow":
             amount = ggPoints[i] - ggPointsObjects[i]["price"]
+            buyNowObjects.append(ggPointsObjects[i])
         ggPoints.append(amount)
-        i = i + 1 
+        i = i + 1
 
 
     data = {
-        "username": userName, 
+        "username": userName,
         "wins": winsCount,
         "losses": lossCount,
         "gamesPlayed": gamesPlayed,
         "ggPoints": ggPoints,
         "matchHistory": matchHistoryArray,
-        "madden": maddenCount, 
+        "buyNow": buyNowObjects,
+        "madden": maddenCount,
         "valorant": valorantCount,
-        "nba2k21": nbaCount, 
+        "nba2k21": nbaCount,
         "fifa21": fifaCount,
         "nhl21": nhlCount
     }
@@ -144,12 +203,39 @@ def buy_view(request):
         'form': form,
     }
     return render(request, 'users/buy.html', context)
-  
+
 def dashboard(request):
-    return render(request, 'game/dashboard.html')
-  
+    registrations = registration.objects.filter(player=request.user)
+    tournaments = []
+    for t in registrations:
+        tournaments += tournament.objects.filter(id=t.id)
+    context = {
+        "tournament": tournaments,
+        "registration": registrations,
+    }
+    return render(request, 'game/dashboard.html', context)
+
+def myTournaments(request):
+    tournaments = tournament.objects.filter(creator=request.user)
+    context = {
+        "tournament": tournaments
+    }
+    return render(request, 'game/myTournaments.html', context)
+
+def joinTournaments(request):
+    registrations = registration.objects.filter(player=request.user)
+    registrationIds = []
+    for t in registrations:
+        registrationIds.append(t.id)
+    tournaments = tournament.objects.exclude(id__in = registrationIds)
+    context = {
+        "tournament": tournaments,
+        "registration": registrations,
+    }
+    return render(request, 'game/joinTournaments.html', context)
+
 def profile(request):
-    if request.method == "POST":
+    if request.method == "POST" and "profileButton" in request.POST:
         firstname = request.POST.get("firstname")
         lastname = request.POST.get("lastname")
         address = request.POST.get("address")
@@ -175,20 +261,6 @@ def profile(request):
         request.user.save()
         request.user.profile.save()
 <<<<<<< Updated upstream
-=======
-    elif request.method == "POST" and "acceptButton" in request.POST:
-        modid = request.POST.get('friend_id')
-        fq = friend.objects.get(id=modid)
-        fq.accepted = True
-        fq.save()
-    elif request.method == "POST" and "declineButton" in request.POST:
-        modid = request.POST.get('friend_id')
-        fq = friend.objects.get(id=modid)
-        fq.delete()
-    elif request.method == "POST" and "deleteButton" in request.POST:
-        modid = request.POST.get('friend_id')
-        fq = friend.objects.get(id=modid)
-        fq.delete()
     elif request.method == "POST" and "friendButton" in request.POST:
         friendData = friend(requester=request.user)
         form = friendForm(request.POST, instance=friendData)
@@ -205,7 +277,7 @@ def profile(request):
     }
 >>>>>>> Stashed changes
 
-    return render(request, 'game/profile.html')
-    
+    return render(request, 'game/profile.html', context)
+
 def bracket(request):
     return render(request, 'game/bracket.html')
