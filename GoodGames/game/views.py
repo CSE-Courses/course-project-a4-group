@@ -260,6 +260,19 @@ def profile(request):
         request.user.profile.facebook_url = facebook
         request.user.save()
         request.user.profile.save()
+    elif request.method == "POST" and "acceptButton" in request.POST:
+        modid = request.POST.get('friend_id')
+        fq = friend.objects.get(id=modid)
+        fq.accepted = True
+        fq.save()
+    elif request.method == "POST" and "declineButton" in request.POST:
+        modid = request.POST.get('friend_id')
+        fq = friend.objects.get(id=modid)
+        fq.delete()
+    elif request.method == "POST" and "deleteButton" in request.POST:
+        modid = request.POST.get('friend_id')
+        fq = friend.objects.get(id=modid)
+        fq.delete()
     elif request.method == "POST" and "friendButton" in request.POST:
         friendData = friend(requester=request.user)
         form = friendForm(request.POST, instance=friendData)
