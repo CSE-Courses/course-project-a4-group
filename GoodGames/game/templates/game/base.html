@@ -40,6 +40,12 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{% if user.is_authenticated %}{% url 'joinTournaments' %}{% else %}{% url 'login' %}{% endif %}">
+                            <i class="tim-icons icon-controller"></i>
+                            <p>Join Tournaments</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{% if user.is_authenticated %}{% url 'myTournaments' %}{% else %}{% url 'login' %}{% endif %}">
                             <i class="tim-icons icon-trophy"></i>
                             <p>My Tournaments</p>

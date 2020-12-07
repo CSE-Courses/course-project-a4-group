@@ -221,7 +221,19 @@ def myTournaments(request):
         "tournament": tournaments
     }
     return render(request, 'game/myTournaments.html', context)
-  
+
+def joinTournaments(request):
+    registrations = registration.objects.filter(player=request.user)
+    registrationIds = []
+    for t in registrations:
+        registrationIds.append(t.id)
+    tournaments = tournament.objects.exclude(id__in = registrationIds)
+    context = {
+        "tournament": tournaments,
+        "registration": registrations,
+    }    
+    return render(request, 'game/joinTournaments.html', context)
+
 def profile(request):
     if request.method == "POST" and "profileButton" in request.POST:
         firstname = request.POST.get("firstname")
