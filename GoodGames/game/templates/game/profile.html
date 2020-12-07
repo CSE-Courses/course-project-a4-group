@@ -344,7 +344,13 @@
                                         {% for req in requests %}
                                         {% if req.accepted %}
                                             <tr>
-                                                <td>{{req.requestee}}</td>
+                                                <td>
+                                                    {% if req.requester.get_username == user.get_username %}
+                                                        {{req.requestee.get_username}}
+                                                    {% else %}
+                                                        {{req.requester.get_username}}
+                                                    {% endif %}
+                                                </td>
                                                 <td>
                                                     <form method="POST">
                                                         {% csrf_token %}
@@ -375,10 +381,22 @@
                                         {% for req in requests %}
                                         {% if req.accepted == False %}
                                             <tr>
-                                                <td>{{req.requestee}}</td>
-                                                <td>Pending...</td>
                                                 <td>
-                                                    {% if req.requestee == user.name %}
+                                                    {% if req.requester.get_username == user.get_username %}
+                                                        {{req.requestee.get_username}}
+                                                    {% else %}
+                                                        {{req.requester.get_username}}
+                                                    {% endif %}
+                                                </td>
+                                                <td>
+                                                    {% if req.requester.get_username == user.get_username %}
+                                                        Outgoing friend request
+                                                    {% else %}
+                                                        Incoming friend request
+                                                    {% endif %}
+                                                </td>
+                                                <td>
+                                                    {% if req.requestee.get_username == user.get_username %}
                                                     <form method="POST">
                                                         {% csrf_token %}
                                                         <input type="hidden" value="{{req.id}}" name="friend_id">

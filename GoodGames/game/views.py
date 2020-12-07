@@ -281,7 +281,7 @@ def profile(request):
     form = friendForm()
 
     userName = str(Profile.objects.get(user = request.user).user)
-    pendingRequests = friend.objects.filter(requester=request.user)
+    pendingRequests = friend.objects.filter( Q(requestee=request.user) | Q(requester=request.user))
 
     context = {
         'form': form,
