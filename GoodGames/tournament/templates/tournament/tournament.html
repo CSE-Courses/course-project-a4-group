@@ -1,23 +1,116 @@
-{% extends 'game/base.html' %}
-{% block content %}
+{% extends 'game/base.html' %} {% load static %} {% block content %}
 
 <div class="card">
-    <div class="card-header d-flex justify-content-between">
-        <h1>{{tournament.name}}</h1>
-        <form method="POST">
-            {% csrf_token %}
-            <button class="btn btn-primary">Register</button>
-        </form>
-    </div>
-    <div class="card-body">
-        <p>Number of Players: {{tournament.no_of_players}}</p>
-        <p>Start Date: {{tournament.start_date}}</p>
-        <hr>
-        <h3>Players Registered</h3>
-        {% for reg in regs %}
-            <p>{{ reg.player.username }}</p>
-        {% endfor %}
-    </div>
-</div>
+  <div class="card-header d-flex justify-content-between">
+    <h1>{{tournament.name}}</h1>
+    {% if tournament.winner %}
+    <h1>{{ tournamant.winner }} has won the tournament!</h1>
+    {% endif %} {% if tournament.started == False %}
+    <form method="POST">
+      {% csrf_token %}
+      <button name="register" class="btn btn-primary">Register</button>
+    </form>
+    {% endif %} {% if user.id == tournament.creator.id and tournament.started == False %}
+    <form method="POST">
+      {% csrf_token %}
+      <button name="start" class="btn btn-primary">Start</button>
+    </form>
+    {% endif %}
+  </div>
+  <div class="card-body">
+    <p>Number of Players: {{tournament.no_of_players}}</p>
+    <p>Start Date: {{tournament.start_date}}</p>
+    <hr />
+    <h3>Players Registered</h3>
+    {% for reg in regs %}
+    <p>{{ reg.player.username }}</p>
+    {% endfor %}
 
-{% endblock %}
+    <link rel="stylesheet" href="{% static 'game/assets/css/bracket-style.css' %}" />
+
+    {% if tournament.started == True %}
+    <hr />
+    <h2>Bracket</h2>
+    <div class="brackets" id="brackets">
+      <img src onerror="renderBrackets()" />
+      {% endif %}
+    </div>
+
+    <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript">
+      /*
+       * Inject our brackets
+       */
+      function renderBrackets() {
+        struct = JSON.parse('{{matches|escapejs}}');
+        users = JSON.parse('{{users|escapejs}}');
+        console.log(users);
+        bracketCount = struct.length;
+        var groupCount = _.uniq(
+          _.map(struct, function (s) {
+            return s.fields.roundNo;
+          })
+        ).length;
+
+        var group = $('<div class="group' + (groupCount + 1) + '" id="b' + bracketCount + '"></div>'),
+          grouped = _.groupBy(struct, function (s) {
+            return s.fields.roundNo;
+          });
+
+        for (g = 1; g <= groupCount; g++) {
+          var round = $('<div class="r' + g + '"></div>');
+          _.each(grouped[g], function (gg) {
+            if (gg.fields.bye) round.append('<div></div>');
+            else console.log(gg);
+
+            var p1 = '';
+            var p2 = '';
+
+            if (users[gg.fields.p1] != undefined) {
+              p1 = users[gg.fields.p1];
+            }
+            if (users[gg.fields.p2] != undefined) {
+              p2 = users[gg.fields.p2];
+            }
+
+            console.log(gg.fields.winner);
+            var link = '';
+            if (p1 != '' && p2 != '' && gg.fields.winner == null) {
+              link = '<a href="updatescore/' + gg.pk + '">Update Score</a>';
+            }
+
+            round.append(
+              '<div><div class="bracketbox"><span class="info">' +
+                link +
+                '</span><span class="teama">' +
+                p1 +
+                '</span><span class="teamb">' +
+                p2 +
+                '</span></div></div>'
+            );
+          });
+          group.append(round);
+        }
+        var winner = '';
+        if ('{{tournament.winner.username}}' != 'undefined') {
+          winner = '{{tournament.winner.username}}';
+        }
+        group.append(
+          '<div class="r' +
+            (groupCount + 1) +
+            '"><div class="final"><div class="bracketbox"><span class="teamc">' +
+            winner +
+            '</span></div></div></div>'
+        );
+        $('#brackets').append(group);
+
+        bracketCount++;
+        $('html,body').animate({
+          scrollTop: $('#b' + (bracketCount - 1)).offset().top,
+        });
+      }
+    </script>
+  </div>
+
+  {% endblock %}
+</div>

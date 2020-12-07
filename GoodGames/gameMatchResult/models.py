@@ -11,3 +11,6 @@ class singleGameMatchResult(models.Model):
     date = models.DateTimeField(default=now)
     game = models.CharField(default="", max_length=100)
     modelName = models.CharField(default="singleGameMatchResult", max_length=100)
+
+    def __str__(self):
+        return '{} vs {} in {}'.format(self.winner, self.loser, self.game)
