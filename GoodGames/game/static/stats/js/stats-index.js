@@ -96,12 +96,6 @@ var myChart = new Chart(ctx, {
                 ticks: {
                     beginAtZero: true
                 }
-            }], xAxes: [{
-                ticks: {
-                    autoSkip: false,
-                    maxRotation: 45,
-                    minRotation: 45
-                }
             }]
         }
     }
@@ -136,12 +130,6 @@ var lineChart = new Chart(linear, {
             yAxes: [{
                 ticks: {
                     beginAtZero: true
-                }
-            }],xAxes: [{
-                ticks: {
-                    autoSkip: false,
-                    maxRotation: 90,
-                    minRotation: 90
                 }
             }]
         }

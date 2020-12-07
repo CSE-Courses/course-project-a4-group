@@ -1,6 +1,4 @@
 from django.db import models
-from django.utils.timezone import now
-from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -14,3 +12,4 @@ class singleGameMatchResult(models.Model):
 
     def __str__(self):
         return '{} vs {} in {}'.format(self.winner, self.loser, self.game)
+
